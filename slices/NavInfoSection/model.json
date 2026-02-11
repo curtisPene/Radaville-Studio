@@ -1,0 +1,49 @@
+{
+  "id": "nav_info_section",
+  "type": "SharedSlice",
+  "name": "NavInfoSection",
+  "description": "NavInfoSection",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": "Section Title"
+          }
+        },
+        "section_number": {
+          "type": "Text",
+          "config": {
+            "label": "Section Number",
+            "placeholder": "Section Number"
+          }
+        },
+        "section_items": {
+          "type": "Group",
+          "config": {
+            "label": "Section Items",
+            "repeat": true,
+            "fields": {
+              "section_item": {
+                "type": "Text",
+                "config": {
+                  "label": "Section Item",
+                  "placeholder": "Section Item"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
