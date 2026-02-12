@@ -187,39 +187,6 @@ interface PageDocumentData {
   title: prismic.KeyTextField;
 
   /**
-   * Background Color field in *Page*
-   *
-   * - **Field Type**: Color
-   * - **Placeholder**: Background Color
-   * - **API ID Path**: page.background_color
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/color
-   */
-  background_color: prismic.ColorField;
-
-  /**
-   * Font Color field in *Page*
-   *
-   * - **Field Type**: Color
-   * - **Placeholder**: Font Color
-   * - **API ID Path**: page.font_color
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/color
-   */
-  font_color: prismic.ColorField;
-
-  /**
-   * Description field in *Page*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Page Description
-   * - **API ID Path**: page.description
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  description: prismic.KeyTextField;
-
-  /**
    * Page Title field in *Page*
    *
    * - **Field Type**: Text
@@ -240,6 +207,39 @@ interface PageDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
   page_number: prismic.KeyTextField;
+
+  /**
+   * Description field in *Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Page Description
+   * - **API ID Path**: page.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * Background Color field in *Page*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: Background Color
+   * - **API ID Path**: page.background_color
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/color
+   */
+  background_color: prismic.ColorField;
+
+  /**
+   * Font Color field in *Page*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: Font Color
+   * - **API ID Path**: page.font_color
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/color
+   */
+  font_color: prismic.ColorField;
 
   /**
    * Slice Zone field in *Page*

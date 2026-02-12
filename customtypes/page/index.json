@@ -19,27 +19,6 @@
           "placeholder": "Page Title"
         }
       },
-      "background_color": {
-        "type": "Color",
-        "config": {
-          "label": "Background Color",
-          "placeholder": "Background Color"
-        }
-      },
-      "font_color": {
-        "type": "Color",
-        "config": {
-          "label": "Font Color",
-          "placeholder": "Font Color"
-        }
-      },
-      "description": {
-        "type": "Text",
-        "config": {
-          "label": "Description",
-          "placeholder": "Page Description"
-        }
-      },
       "page_title": {
         "type": "Text",
         "config": {
@@ -52,6 +31,27 @@
         "config": {
           "label": "Page Number",
           "placeholder": "Page Number"
+        }
+      },
+      "description": {
+        "type": "Text",
+        "config": {
+          "label": "Description",
+          "placeholder": "Page Description"
+        }
+      },
+      "background_color": {
+        "type": "Color",
+        "config": {
+          "label": "Background Color",
+          "placeholder": "Background Color"
+        }
+      },
+      "font_color": {
+        "type": "Color",
+        "config": {
+          "label": "Font Color",
+          "placeholder": "Font Color"
         }
       },
       "slices": {
