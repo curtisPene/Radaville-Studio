@@ -14,7 +14,7 @@ export const Header = ({ pageNumber, pageTitle }: HeaderConfig) => {
     <>
       <header
         data-component="header"
-        className="flex flex-row items-start justify-between fixed inset-0  p-[3vw]"
+        className="flex flex-row items-start justify-between fixed left-0 top-0 right-0 p-[3vw]"
       >
         <div className="flex flex-row gap-[3vw]">
           <WordMark />

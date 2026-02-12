@@ -1,8 +1,16 @@
+import { Metadata } from "next";
 import { Old_Standard_TT, Inter_Tight } from "next/font/google";
 import "./globals.css";
 import { ViewTransitions } from "next-view-transitions";
 import { NavProvider } from "@/context/nav-context";
 import { NavigationWrapper } from "@/components/navigation-wrapper";
+import { Footer } from "@/components/footer";
+
+export const metadata: Metadata = {
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
 
 const oldStandardTT = Old_Standard_TT({
   variable: "--font-old-standard-tt",

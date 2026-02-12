@@ -20,7 +20,7 @@ export function PageLayout({
   dataPage,
   dataHref,
   children,
-  height = "100ch",
+  height = "100vh",
 }: PageLayoutProps) {
   return (
     <div
@@ -30,11 +30,13 @@ export function PageLayout({
         background: backgroundColor,
         color: fontColor,
         height: height,
-        padding: "3vw",
+        padding: "14vw 3vw 3vw",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <Header key={pageTitle} pageNumber={pageNumber} pageTitle={pageTitle} />
-      <main>{children}</main>
+      {children}
     </div>
   );
 }

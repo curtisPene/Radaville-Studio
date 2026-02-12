@@ -338,17 +338,6 @@ interface ProjectDocumentData {
   number: prismic.NumberField;
 
   /**
-   * Thumbnail field in *Project*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: project.thumbnail
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/image
-   */
-  thumbnail: prismic.ImageField<never>;
-
-  /**
    * Year field in *Project*
    *
    * - **Field Type**: Text
@@ -362,13 +351,24 @@ interface ProjectDocumentData {
   /**
    * Background Color field in *Project*
    *
-   * - **Field Type**: Text
-   * - **Placeholder**: Project Background Color
+   * - **Field Type**: Color
+   * - **Placeholder**: Background Color
    * - **API ID Path**: project.background_color
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/text
+   * - **Documentation**: https://prismic.io/docs/fields/color
    */
-  background_color: prismic.KeyTextField;
+  background_color: prismic.ColorField;
+
+  /**
+   * Thumbnail field in *Project*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.thumbnail
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  thumbnail: prismic.ImageField<never>;
 
   /**
    * Gallery field in *Project*

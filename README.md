@@ -1,4 +1,8 @@
+# Radaville Studio
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+Portfolio site for Radaville Studio, a creative agency. Built with Next.js, GSAP, and Prismic CMS.
 
 ## Getting Started
 

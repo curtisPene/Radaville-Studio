@@ -1,6 +1,9 @@
 import { Metadata } from "next";
 import { PageLayout } from "@/components/layout/page-layout";
-import { getPageData } from "@/lib/prismic-service";
+import { getPageData, getProjectSlideData } from "@/lib/prismic-service";
+import { Footer } from "@/components/footer";
+import { Carousel } from "@/features/work/components/carousel";
+import CarouselProvider from "@/features/work/context/carousel-context";
 
 const {
   background_color,
@@ -10,6 +13,8 @@ const {
   title,
   description,
 } = await getPageData("work");
+
+const projectSlideData = await getProjectSlideData();
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -34,7 +39,9 @@ export default async function Home() {
       dataPage="work"
       dataHref="/"
     >
-      {/* Page content goes here */}
+      <CarouselProvider>
+        <Carousel data={projectSlideData} />
+      </CarouselProvider>
     </PageLayout>
   );
 }

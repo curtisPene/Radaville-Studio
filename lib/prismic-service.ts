@@ -1,5 +1,7 @@
 import { createClient } from "@/prismicio";
-import { NavigationDocumentData } from "@/prismicio-types";
+import { NavigationDocumentData, ProjectDocument } from "@/prismicio-types";
+import { ImageField } from "@prismicio/client";
+import { PrismicNextImage } from "@prismicio/next";
 
 export type PageData = {
   title: string;
@@ -8,6 +10,15 @@ export type PageData = {
   font_color: string;
   page_title: string;
   page_number: string;
+};
+
+export type ProjectSlide = {
+  id: string;
+  title: string;
+  number: number;
+  year: string;
+  backgroundColor: `#${string}`;
+  image: ImageField;
 };
 
 export async function getPageData(uid: string): Promise<PageData> {
@@ -50,4 +61,28 @@ export async function getNavigationData(): Promise<NavigationDocumentData> {
   }
 
   return data;
+}
+
+export async function getProjectSlideData(): Promise<ProjectSlide[]> {
+  const projects = await createClient().getAllByType("project");
+
+  return projects
+    .map((project) => {
+      const { title, number, year, background_color, thumbnail } = project.data;
+
+      if (!title || !number || !year || !background_color || !thumbnail) {
+        return null;
+      }
+
+      return {
+        id: project.uid || project.id,
+        title,
+        number,
+        year,
+        backgroundColor: background_color,
+        image: thumbnail,
+      };
+    })
+    .filter((slide): slide is ProjectSlide => slide !== null)
+    .sort((a, b) => a.title.localeCompare(b.title));
 }

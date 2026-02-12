@@ -26,14 +26,6 @@
           "placeholder": "Project Number"
         }
       },
-      "thumbnail": {
-        "type": "Image",
-        "config": {
-          "label": "Thumbnail",
-          "constraint": {},
-          "thumbnails": []
-        }
-      },
       "year": {
         "type": "Text",
         "config": {
@@ -42,10 +34,18 @@
         }
       },
       "background_color": {
-        "type": "Text",
+        "type": "Color",
         "config": {
           "label": "Background Color",
-          "placeholder": "Project Background Color"
+          "placeholder": "Background Color"
+        }
+      },
+      "thumbnail": {
+        "type": "Image",
+        "config": {
+          "label": "Thumbnail",
+          "constraint": {},
+          "thumbnails": []
         }
       },
       "gallery": {
