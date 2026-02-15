@@ -19,6 +19,7 @@ import {
   useWorkOrchestrator,
 } from "@/features/work/context/work-orchestrator";
 import { HeaderAnimController } from "@/components/layout/header/use-header-animation";
+import { FooterAnimController } from "@/components/layout/footer/use-footer-animaiton";
 
 type Direction = "forward" | "backward";
 
@@ -31,7 +32,7 @@ export const useCarouselAnimations = (projectSlideData: ProjectSlide[]) => {
 
   const currentIndexRef = useRef(currentSlideDataIndex);
 
-  const buildCarouselEntrance = useCarouselEntrance();
+  const buildCarouselEntrance = useCarouselEntrance(ref);
   const buildCarousel = useCarousel(ref);
   const buildColor = usePageColorAnimation(projectSlideData);
   const buildText = useSlideTextAnimation(ref);
@@ -75,8 +76,10 @@ export const useCarouselAnimations = (projectSlideData: ProjectSlide[]) => {
   useImperativeHandle(
     carouselRef,
     (): CarouselAnimController => ({
-      enter: (header: HeaderAnimController["enter"]) =>
-        buildCarouselEntrance(header, observer),
+      enter: (
+        header: HeaderAnimController["enter"],
+        footer: FooterAnimController["enter"],
+      ) => buildCarouselEntrance(header, footer, observer),
     }),
   );
 

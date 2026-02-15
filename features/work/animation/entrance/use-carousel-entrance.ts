@@ -1,3 +1,4 @@
+import { FooterAnimController } from "@/components/layout/footer/use-footer-animaiton";
 import { HeaderAnimController } from "@/components/layout/header/use-header-animation";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -6,12 +7,13 @@ import { RefObject } from "react";
 
 gsap.registerPlugin(SplitText);
 
-export const useCarouselEntrance = () => {
-  const { contextSafe } = useGSAP();
+export const useCarouselEntrance = (ref: RefObject<HTMLDivElement | null>) => {
+  const { contextSafe } = useGSAP({ scope: ref });
 
   return contextSafe(
     (
       header: HeaderAnimController["enter"],
+      footer: FooterAnimController["enter"],
       observer: RefObject<Observer | null>,
     ) => {
       const slides = gsap.utils.toArray(
@@ -24,11 +26,15 @@ export const useCarouselEntrance = () => {
       const firstImage = firstVisibleSlide.querySelector("img");
       const lastThreeVisibleSlides = slides.slice(1, 4);
       const slideInfo = gsap.utils.toArray("[data-component=slide-info] > *");
+      const indicator = gsap.utils.toArray(
+        "[data-component=carousel-footer] > *",
+      );
 
       const proxy = { inset: 100 };
 
       return gsap
         .timeline({
+          delay: 0.6,
           onStart: () => {
             observer.current?.disable();
             gsap.set(firstImage, { scale: 1.8 });
@@ -73,6 +79,7 @@ export const useCarouselEntrance = () => {
           "<",
         )
         .add(header(), "<")
+        .add(footer(), "<")
         .from(
           split.words,
           {
@@ -91,7 +98,8 @@ export const useCarouselEntrance = () => {
             ease: "power2.out",
           },
           "<",
-        );
+        )
+        .to(indicator, { y: "0%", duration: 0.4, ease: "power2.out" }, "<");
     },
   );
 };
