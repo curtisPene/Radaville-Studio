@@ -13,7 +13,7 @@ export const CarouselFooter = () => {
         {" "}
         [01]{" "}
       </Body>
-      <div className="flex-1 flex flex-row justify-around translate-y-full translate-y-full">
+      <div className="flex-1 flex flex-row justify-around translate-y-full">
         <Body caption faded>
           |
         </Body>

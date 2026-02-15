@@ -28,7 +28,11 @@ export const useHeaderAnimation = () => {
   const buildExit = contextSafe(() =>
     gsap
       .timeline()
-      .to("[data-component=header]", { opacity: 0, duration: 0.4 }),
+      .fromTo(
+        "[data-component=header]",
+        { opacity: 1 },
+        { opacity: 0, duration: 0.4 },
+      ),
   );
 
   useImperativeHandle(

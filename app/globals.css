@@ -47,6 +47,19 @@
   display: block;
 }
 
+[data-component="slide"] h3 {
+  font-kerning: none;
+}
+
+[data-component="nav-links"] a {
+  font-kerning: none;
+}
+
+.split-chars {
+  display: inline-block; /* Essential for animation */
+  position: relative; /* Helps with positioning */
+}
+
 @keyframes slideUpReveal {
   from {
     transform: translateY(100vh);
