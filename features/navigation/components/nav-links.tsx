@@ -1,4 +1,4 @@
-import { TransitionLink } from "@/components/ui/transition-link";
+import { TransitionLink } from "@/components/ui/transition-link/transition-link";
 import { useRef } from "react";
 import { useEnterNavLinks } from "../animation/use-enter-nav-links";
 

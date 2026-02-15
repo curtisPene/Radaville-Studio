@@ -1,17 +1,17 @@
-import { WordMark } from "@/components/svg/word-mark";
+import { WordMark } from "@/components/brand/word-mark";
 import { useNav } from "@/context/nav-context";
+import { useEnterNavHeader } from "@/features/navigation/animation/use-enter-nav-header";
+import { useStartTransition } from "@/components/ui/transition-link/use-start-transition";
 import { XIcon } from "lucide-react";
 import { useRef } from "react";
-import { useEnterNavHeader } from "../animation/use-enter-nav-header";
 
 export const NavHeader = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { setIsVisible } = useNav();
+  const startTransition = useStartTransition({ willNavigate: false });
 
   const handleNavClose = () => {
-    document.startViewTransition(() => {
-      setIsVisible(false);
-    });
+    startTransition(() => setIsVisible(false));
   };
 
   useEnterNavHeader(ref);

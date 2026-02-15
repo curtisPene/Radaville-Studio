@@ -1,6 +1,7 @@
 "use client";
 
 import { useNav } from "@/context/nav-context";
+import { useStartTransition } from "@/components/ui/transition-link/use-start-transition";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
@@ -14,6 +15,8 @@ export const useAnimateLink = () => {
   const router = useRouter();
   const pathname = usePathname();
   const { setIsVisible } = useNav();
+  const startTransition = useStartTransition();
+
   useGSAP(
     () => {
       if (!ref.current) return;
@@ -38,8 +41,9 @@ export const useAnimateLink = () => {
           ease: "power2.inOut",
           transformOrigin: "center center",
         });
+
         tween.play().then(() => {
-          document.startViewTransition(() => {
+          startTransition(() => {
             setIsVisible(false);
             if (pathname !== target.dataset.href) {
               router.push(target.dataset.href as string);

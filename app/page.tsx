@@ -1,9 +1,9 @@
 import { Metadata } from "next";
-import { PageLayout } from "@/components/layout/page-layout";
+import { PageLayout } from "@/components/layout/page-layout/page-layout";
 import { getPageData, getProjectSlideData } from "@/lib/prismic-service";
-import { Footer } from "@/components/footer";
 import { Carousel } from "@/features/work/components/carousel";
 import CarouselProvider from "@/features/work/context/carousel-context";
+import { WorkOrchestrator } from "@/features/work/context/work-orchestrator";
 
 const {
   background_color,
@@ -31,17 +31,19 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Home() {
   return (
-    <PageLayout
-      backgroundColor={background_color}
-      fontColor={font_color}
-      pageTitle={page_title}
-      pageNumber={page_number}
-      dataPage="work"
-      dataHref="/"
-    >
-      <CarouselProvider>
-        <Carousel data={projectSlideData} />
-      </CarouselProvider>
-    </PageLayout>
+    <WorkOrchestrator>
+      <PageLayout
+        backgroundColor={background_color}
+        fontColor={font_color}
+        pageTitle={page_title}
+        pageNumber={page_number}
+        dataPage="work"
+        dataHref="/"
+      >
+        <CarouselProvider>
+          <Carousel data={projectSlideData} />
+        </CarouselProvider>
+      </PageLayout>
+    </WorkOrchestrator>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import { useAnimateLink } from "@/hooks/useAnimateLink";
+import { useAnimateLink } from "@/components/ui/transition-link/useAnimateLink";
 
 export type TransitionLinkConfig = {
   children: React.ReactNode;

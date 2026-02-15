@@ -3,8 +3,8 @@ import { Old_Standard_TT, Inter_Tight } from "next/font/google";
 import "./globals.css";
 import { ViewTransitions } from "next-view-transitions";
 import { NavProvider } from "@/context/nav-context";
-import { NavigationWrapper } from "@/components/navigation-wrapper";
-import { Footer } from "@/components/footer";
+import { AppStateProvider } from "@/context/app-state-context";
+import { NavigationWrapper } from "@/components/navigation-wrapper/navigation-wrapper";
 
 export const metadata: Metadata = {
   icons: {
@@ -31,16 +31,18 @@ export default async function RootLayout({
 }>) {
   return (
     <ViewTransitions>
-      <NavProvider>
-        <html lang="en">
-          <body
-            className={`${oldStandardTT.variable} ${interTight.variable} antialiased relative bg-black`}
-          >
-            {children}
-            <NavigationWrapper />
-          </body>
-        </html>
-      </NavProvider>
+      <AppStateProvider>
+        <NavProvider>
+          <html lang="en">
+            <body
+              className={`${oldStandardTT.variable} ${interTight.variable} antialiased relative bg-black`}
+            >
+              {children}
+              <NavigationWrapper />
+            </body>
+          </html>
+        </NavProvider>
+      </AppStateProvider>
     </ViewTransitions>
   );
 }

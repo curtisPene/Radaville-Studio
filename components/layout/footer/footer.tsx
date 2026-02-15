@@ -1,4 +1,4 @@
-import { Body } from "./typography/body";
+import { Body } from "../../typography/body";
 
 export const Footer = () => {
   return (

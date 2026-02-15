@@ -31,7 +31,12 @@ export const Body = ({
       {...rest}
       className={clsx(
         underline && "underline",
-        sub ? "text-[3.25vw]" : caption ? "text-[2.5vw]" : "text-[3.75vw]",
+        sub
+          ? "text-[3.25vw]"
+          : caption
+            ? "text-[2.5vw]"
+            : // : "text-[3.75vw] xs:text-[clamp(8px,0.568vw+10.18px,16px)]",
+              "text-[3.75vw]",
         "font-sans",
         leadingNone ? "leading-none" : "leading-tight",
         className,

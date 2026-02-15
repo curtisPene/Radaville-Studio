@@ -12,6 +12,17 @@
   --font-serif: var(--font-old-standard-tt);
 }
 
+@theme {
+  /* break-points */
+  --breakpoint-xs: 320px;
+  --breakpoint-sm: 375px;
+  --breakpoint-md: 425px;
+  --breakpoint-lg: 768px;
+  --breakpoint-xl: 1024px;
+  --breakpoint-2xl: 1440px;
+  --breakpoint-3xl: 2560px;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;

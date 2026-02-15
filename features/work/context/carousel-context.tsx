@@ -1,17 +1,11 @@
 "use client";
 
-import { getProjectSlideData } from "@/lib/prismic-service";
-import { createContext, useContext, useState } from "react";
-
-const slideData = await getProjectSlideData();
+import { createContext, useContext, useRef, useState } from "react";
 
 type CarouselContextType = {
   currentSlideDataIndex: number;
   setCurrentSlideDataIndex: (index: number) => void;
-  forward: boolean;
-  setForward: (forward: boolean) => void;
-  backward: boolean;
-  setBackward: (backward: boolean) => void;
+  isAnimatingRef: React.RefObject<boolean>;
 };
 
 const CarouselContext = createContext<CarouselContextType | undefined>(
@@ -24,16 +18,12 @@ export default function CarouselProvider({
   children: React.ReactNode;
 }) {
   const [currentSlideDataIndex, setCurrentSlideDataIndex] = useState(0);
-  const [forward, setForward] = useState(false);
-  const [backward, setBackward] = useState(false);
+  const isAnimatingRef = useRef(false);
 
   const value = {
     currentSlideDataIndex,
     setCurrentSlideDataIndex,
-    forward,
-    setForward,
-    backward,
-    setBackward,
+    isAnimatingRef,
   };
   return <CarouselContext value={value}>{children}</CarouselContext>;
 }

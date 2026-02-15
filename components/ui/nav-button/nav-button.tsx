@@ -1,12 +1,14 @@
 "use client";
 
 import { useNav } from "@/context/nav-context";
+import { useStartTransition } from "@/components/ui/transition-link/use-start-transition";
 import { MenuIcon } from "lucide-react";
 
 export const NavButton = () => {
   const { setIsVisible } = useNav();
+  const startTransition = useStartTransition();
   const handleClick = () => {
-    document.startViewTransition(() => setIsVisible(true));
+    startTransition(() => setIsVisible(true));
   };
   return (
     <button onClick={handleClick} data-component="nav-button">
