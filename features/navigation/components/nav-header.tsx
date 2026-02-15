@@ -8,7 +8,7 @@ import { useRef } from "react";
 export const NavHeader = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { setIsVisible } = useNav();
-  const startTransition = useStartTransition({ willNavigate: false });
+  const startTransition = useStartTransition();
 
   const handleNavClose = () => {
     startTransition(() => setIsVisible(false));
