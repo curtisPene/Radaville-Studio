@@ -1,7 +1,9 @@
 import { createClient } from "@/prismicio";
-import { NavigationDocumentData, ProjectDocument } from "@/prismicio-types";
-import { ImageField } from "@prismicio/client";
-import { PrismicNextImage } from "@prismicio/next";
+import {
+  NavigationDocumentData,
+  PageDocumentDataSlicesSlice,
+} from "@/prismicio-types";
+import { ImageField, SliceZone } from "@prismicio/client";
 
 export type PageData = {
   title: string;
@@ -10,6 +12,8 @@ export type PageData = {
   font_color: string;
   page_title: string;
   page_number: string;
+  footer_image: ImageField;
+  slices?: SliceZone<PageDocumentDataSlicesSlice>;
 };
 
 export type ProjectSlide = {
@@ -30,6 +34,8 @@ export async function getPageData(uid: string): Promise<PageData> {
     font_color,
     page_title,
     page_number,
+    slices,
+    footer_image,
   } = page.data;
 
   if (
@@ -50,6 +56,8 @@ export async function getPageData(uid: string): Promise<PageData> {
     font_color,
     page_title,
     page_number,
+    slices,
+    footer_image,
   };
 }
 
@@ -86,3 +94,26 @@ export async function getProjectSlideData(): Promise<ProjectSlide[]> {
     .filter((slide): slide is ProjectSlide => slide !== null)
     .sort((a, b) => a.title.localeCompare(b.title));
 }
+
+export const getSlice = <
+  T extends { slice_type: string },
+  K extends T["slice_type"],
+>(
+  slices: T[],
+  type: K,
+): Extract<T, { slice_type: K }> | undefined =>
+  slices.find((s) => s.slice_type === type) as
+    | Extract<T, { slice_type: K }>
+    | undefined;
+
+export const getSlices = <
+  T extends { slice_type: string },
+  K extends T["slice_type"],
+>(
+  slices: T[],
+  type: K,
+): Extract<T, { slice_type: K }>[] =>
+  slices.filter((s) => s.slice_type === type) as Extract<
+    T,
+    { slice_type: K }
+  >[];

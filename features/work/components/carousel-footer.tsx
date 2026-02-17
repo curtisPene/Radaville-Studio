@@ -1,4 +1,4 @@
-import { Body } from "@/components/typography/body";
+import { Label } from "@/components/typography/label";
 
 export const CarouselFooter = () => {
   return (
@@ -6,111 +6,111 @@ export const CarouselFooter = () => {
       data-component="carousel-footer"
       className="flex flex-row justify-between pt-[3vw] overflow-clip"
     >
-      <Body
+      <Label
         data-animate-component="slide-indicator"
         className="translate-y-full"
       >
         {" "}
         [01]{" "}
-      </Body>
+      </Label>
       <div className="flex-1 flex flex-row justify-around translate-y-full">
-        <Body caption faded>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
+        </Label>
       </div>
-      <Body
+      <Label
         data-animate-component="slide-indicator"
         className="translate-y-full"
         faded
       >
         {" "}
         [02]{" "}
-      </Body>
+      </Label>
       <div className="flex-1 flex flex-row justify-around translate-y-full">
-        <Body caption faded>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
-        <Body caption faded>
+        </Label>
+        <Label caption faded>
           |
-        </Body>
+        </Label>
       </div>
-      <Body
+      <Label
         data-animate-component="slide-indicator"
         className="translate-y-full"
         faded
       >
         {" "}
         [03]{" "}
-      </Body>
+      </Label>
     </div>
   );
 };

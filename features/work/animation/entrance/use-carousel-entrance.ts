@@ -34,7 +34,6 @@ export const useCarouselEntrance = (ref: RefObject<HTMLDivElement | null>) => {
 
       return gsap
         .timeline({
-          delay: 0.6,
           onStart: () => {
             observer.current?.disable();
             gsap.set(firstImage, { scale: 1.8 });

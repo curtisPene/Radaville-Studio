@@ -3,7 +3,8 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useImperativeHandle, useRef } from "react";
-import { useWorkOrchestrator } from "@/features/work/context/work-orchestrator";
+import { useLayoutAnimHandles } from "@/context/layout-anim-context";
+import { useAppState } from "@/context/app-state-context";
 
 export type HeaderAnimController = {
   enter: () => gsap.core.Timeline;
@@ -11,7 +12,7 @@ export type HeaderAnimController = {
 };
 
 export const useHeaderAnimation = () => {
-  const { headerRef } = useWorkOrchestrator();
+  const { headerRef } = useLayoutAnimHandles();
   const ref = useRef<HTMLDivElement>(null);
   const { contextSafe } = useGSAP();
 

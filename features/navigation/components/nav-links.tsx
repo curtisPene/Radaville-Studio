@@ -9,11 +9,11 @@ export const NavLinks = () => {
     <nav
       ref={ref}
       data-component="nav-links"
-      className="font-serif text-white text-[12vw] flex flex-col flex-1 justify-end"
+      className="font-serif text-white text-[18vw] flex flex-col flex-1 justify-end"
     >
       <TransitionLink path="/">Work</TransitionLink>
       <TransitionLink path="/">Curation</TransitionLink>
-      <TransitionLink path="/">About</TransitionLink>
+      <TransitionLink path="/about">About</TransitionLink>
       <TransitionLink path="/">Contact</TransitionLink>
     </nav>
   );

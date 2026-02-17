@@ -1,6 +1,5 @@
 "use client";
 
-import { Body } from "@/components/typography/body";
 import { ImageField } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { useCarouselAnimations } from "@/features/work/animation/carousel/use-carousel-animations";
@@ -10,6 +9,7 @@ import { useCarousel as useCarouselContext } from "@/features/work/context/carou
 import clsx from "clsx";
 import { CarouselFooter } from "./carousel-footer";
 import { Footer } from "@/components/layout/footer/footer";
+import { Label } from "@/components/typography/label";
 
 const Slide = ({
   translateZ,
@@ -64,30 +64,30 @@ export function Carousel({ data: projectSlideData }: { data: ProjectSlide[] }) {
     <section
       ref={ref}
       data-component="carousel-root"
-      className="flex-1 flex flex-col"
+      className={clsx("flex-1 flex flex-col")}
     >
       <div
         data-component="slide-info"
         className="flex flex-row justify-between overflow-clip"
       >
         <div className="translate-y-full">
-          <Body>Year</Body>
+          <Label>Year</Label>
           <div
             data-animate-component="slide-year"
             className="h-[3.8vw] overflow-clip"
           >
-            <Body>{projectSlideData[currentSlideDataIndex].year}</Body>
-            <Body>####</Body>
+            <Label>{projectSlideData[currentSlideDataIndex].year}</Label>
+            <Label>####</Label>
           </div>
         </div>
         <div className="translate-y-full">
-          <Body>Slide</Body>
-          <Body>
-            <Body data-animate-component="slide-number-current" inline>
+          <Label>Slide</Label>
+          <Label>
+            <Label data-animate-component="slide-number-current" inline>
               1
-            </Body>
+            </Label>
             {""} - {projectSlideData.length}
-          </Body>
+          </Label>
         </div>
       </div>
       <div data-component="carousel" className="flex-1 relative">

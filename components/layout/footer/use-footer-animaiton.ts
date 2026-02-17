@@ -3,7 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useImperativeHandle, useRef } from "react";
-import { useWorkOrchestrator } from "@/features/work/context/work-orchestrator";
+import { useLayoutAnimHandles } from "@/context/layout-anim-context";
 import { SplitText } from "gsap/SplitText";
 
 gsap.registerPlugin(SplitText);
@@ -13,8 +13,12 @@ export type FooterAnimController = {
   exit: () => gsap.core.Timeline;
 };
 
-export const useFooterAnimation = () => {
-  const { footerRef } = useWorkOrchestrator();
+export const useFooterAnimation = ({
+  trigger = false,
+}: {
+  trigger: boolean;
+}) => {
+  const { footerRef } = useLayoutAnimHandles();
   const ref = useRef<HTMLDivElement>(null);
   const { contextSafe } = useGSAP({ scope: ref });
 
@@ -38,6 +42,25 @@ export const useFooterAnimation = () => {
       enter: buildEntrance,
       exit: buildExit,
     }),
+  );
+
+  useGSAP(
+    () => {
+      if (!ref.current || !trigger) return;
+      gsap.fromTo(
+        "[data-component=footer]",
+        { y: "100%" },
+        {
+          y: 0,
+          duration: 0.4,
+          scrollTrigger: {
+            trigger: ref.current,
+            start: "bottom bottom ",
+          },
+        },
+      );
+    },
+    { scope: ref, dependencies: [] },
   );
 
   return ref;

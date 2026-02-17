@@ -169,7 +169,10 @@ export type NavigationDocument<Lang extends string = string> =
     Lang
   >;
 
-type PageDocumentDataSlicesSlice = never;
+type PageDocumentDataSlicesSlice =
+  | ListSlice
+  | GalleryImageSlice
+  | TextBlockSlice;
 
 /**
  * Content for Page documents
@@ -240,6 +243,17 @@ interface PageDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/color
    */
   font_color: prismic.ColorField;
+
+  /**
+   * Footer Image field in *Page*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page.footer_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  footer_image: prismic.ImageField<never>;
 
   /**
    * Slice Zone field in *Page*
@@ -404,6 +418,128 @@ export type AllDocumentTypes =
   | ProjectDocument;
 
 /**
+ * Primary content in *GalleryImage → Default → Primary*
+ */
+export interface GalleryImageSliceDefaultPrimary {
+  /**
+   * Image field in *GalleryImage → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: gallery_image.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Caption field in *GalleryImage → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A short description of the gallery item
+   * - **API ID Path**: gallery_image.default.primary.caption
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  caption: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for GalleryImage Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type GalleryImageSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<GalleryImageSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *GalleryImage*
+ */
+type GalleryImageSliceVariation = GalleryImageSliceDefault;
+
+/**
+ * GalleryImage Shared Slice
+ *
+ * - **API ID**: `gallery_image`
+ * - **Description**: GalleryImage
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type GalleryImageSlice = prismic.SharedSlice<
+  "gallery_image",
+  GalleryImageSliceVariation
+>;
+
+/**
+ * Item in *List → Default → Primary → Items*
+ */
+export interface ListSliceDefaultPrimaryItemsItem {
+  /**
+   * List Item field in *List → Default → Primary → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: List Ite
+   * - **API ID Path**: list.default.primary.items[].list_item
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  list_item: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *List → Default → Primary*
+ */
+export interface ListSliceDefaultPrimary {
+  /**
+   * Title field in *List → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: List Title
+   * - **API ID Path**: list.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Items field in *List → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.default.primary.items[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  items: prismic.GroupField<Simplify<ListSliceDefaultPrimaryItemsItem>>;
+}
+
+/**
+ * Default variation for List Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ListSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ListSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *List*
+ */
+type ListSliceVariation = ListSliceDefault;
+
+/**
+ * List Shared Slice
+ *
+ * - **API ID**: `list`
+ * - **Description**: List
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ListSlice = prismic.SharedSlice<"list", ListSliceVariation>;
+
+/**
  * Item in *NavInfoSection → Default → Primary → Section Items*
  */
 export interface NavInfoSectionSliceDefaultPrimarySectionItemsItem {
@@ -485,6 +621,71 @@ export type NavInfoSectionSlice = prismic.SharedSlice<
   NavInfoSectionSliceVariation
 >;
 
+/**
+ * Primary content in *TextBlock → Default → Primary*
+ */
+export interface TextBlockSliceDefaultPrimary {
+  /**
+   * Title field in *TextBlock → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Content title
+   * - **API ID Path**: text_block.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Subtitle field in *TextBlock → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Secondary title
+   * - **API ID Path**: text_block.default.primary.subtitle
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  subtitle: prismic.KeyTextField;
+
+  /**
+   * Content field in *TextBlock → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Text content
+   * - **API ID Path**: text_block.default.primary.content
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  content: prismic.RichTextField;
+}
+
+/**
+ * Default variation for TextBlock Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type TextBlockSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TextBlockSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TextBlock*
+ */
+type TextBlockSliceVariation = TextBlockSliceDefault;
+
+/**
+ * TextBlock Shared Slice
+ *
+ * - **API ID**: `text_block`
+ * - **Description**: TextBlock
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type TextBlockSlice = prismic.SharedSlice<
+  "text_block",
+  TextBlockSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -516,11 +717,24 @@ declare module "@prismicio/client" {
       ProjectDocumentData,
       ProjectDocumentDataGalleryItem,
       AllDocumentTypes,
+      GalleryImageSlice,
+      GalleryImageSliceDefaultPrimary,
+      GalleryImageSliceVariation,
+      GalleryImageSliceDefault,
+      ListSlice,
+      ListSliceDefaultPrimaryItemsItem,
+      ListSliceDefaultPrimary,
+      ListSliceVariation,
+      ListSliceDefault,
       NavInfoSectionSlice,
       NavInfoSectionSliceDefaultPrimarySectionItemsItem,
       NavInfoSectionSliceDefaultPrimary,
       NavInfoSectionSliceVariation,
       NavInfoSectionSliceDefault,
+      TextBlockSlice,
+      TextBlockSliceDefaultPrimary,
+      TextBlockSliceVariation,
+      TextBlockSliceDefault,
     };
   }
 }

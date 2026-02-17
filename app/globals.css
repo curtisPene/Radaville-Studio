@@ -9,7 +9,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter-tight);
-  --font-serif: var(--font-old-standard-tt);
+  --font-serif: var(--font-neue-world);
 }
 
 @theme {
@@ -47,11 +47,19 @@
   display: block;
 }
 
-[data-component="slide"] h3 {
-  font-kerning: none;
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
-[data-component="nav-links"] a {
+[data-component="slide"] h3,
+[data-component="nav-links"] a,
+[data-component="hero-text"] h2,
+[data-component="hero-text"] p {
   font-kerning: none;
 }
 
@@ -76,6 +84,6 @@
   }
   to {
     transform: translateY(-15%);
-    opacity: 0.6;
+    opacity: 0.4;
   }
 }

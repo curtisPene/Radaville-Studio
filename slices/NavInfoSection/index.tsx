@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import { Body } from "@/components/typography/body";
+import { Label } from "@/components/typography/label";
 
 /**
  * Props for `NavInfoSection`.
@@ -21,20 +21,20 @@ const NavInfoSection: FC<NavInfoSectionProps> = ({ slice }) => {
       className="flex flex-col gap-[1vw] items-end py-[2vw]"
     >
       <div className="flex flex-row gap-[2vw]">
-        <Body inline sub faded>
+        <Label inline sub faded>
           {section_number}
-        </Body>
-        <Body inline sub>
+        </Label>
+        <Label inline sub>
           {title}
-        </Body>
+        </Label>
       </div>
 
       <div className="flex flex-col items-end">
         {section_items.map((item) => {
           return (
-            <Body key={item.section_item} inline sub>
+            <Label key={item.section_item} inline sub>
               {item.section_item}
-            </Body>
+            </Label>
           );
         })}
       </div>

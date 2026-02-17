@@ -2,6 +2,8 @@
 
 import { FooterAnimController } from "@/components/layout/footer/use-footer-animaiton";
 import { HeaderAnimController } from "@/components/layout/header/use-header-animation";
+import { useAppState } from "@/context/app-state-context";
+import { useLayoutAnimHandles } from "@/context/layout-anim-context";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { createContext, useContext, useRef, RefObject } from "react";
@@ -15,8 +17,6 @@ export type CarouselAnimController = {
 
 type WorkOrchestratorContextType = {
   carouselRef: RefObject<CarouselAnimController | null>;
-  headerRef: RefObject<HeaderAnimController | null>;
-  footerRef: RefObject<FooterAnimController | null>;
 };
 
 const WorkOrchestratorContext = createContext<
@@ -35,8 +35,7 @@ export const useWorkOrchestrator = () => {
 
 export function WorkOrchestrator({ children }: { children: React.ReactNode }) {
   const carouselRef = useRef<CarouselAnimController>(null);
-  const headerRef = useRef<HeaderAnimController>(null);
-  const footerRef = useRef<FooterAnimController>(null);
+  const { headerRef, footerRef } = useLayoutAnimHandles();
 
   useGSAP(
     () => {
@@ -44,7 +43,7 @@ export function WorkOrchestrator({ children }: { children: React.ReactNode }) {
         return console.error("WorkOrchestrator: missing ref");
       }
       gsap
-        .timeline()
+        .timeline({ delay: 1.4 })
         .add(
           carouselRef.current.enter(
             headerRef.current.enter,
@@ -56,7 +55,7 @@ export function WorkOrchestrator({ children }: { children: React.ReactNode }) {
   );
 
   return (
-    <WorkOrchestratorContext value={{ carouselRef, headerRef, footerRef }}>
+    <WorkOrchestratorContext value={{ carouselRef }}>
       {children}
     </WorkOrchestratorContext>
   );

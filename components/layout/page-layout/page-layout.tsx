@@ -33,6 +33,7 @@ export function PageLayout({
         padding: "14vw 3vw 3vw",
         display: "flex",
         flexDirection: "column",
+        overflow: "clip",
       }}
     >
       <Header key={pageTitle} pageNumber={pageNumber} pageTitle={pageTitle} />

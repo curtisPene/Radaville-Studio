@@ -1,0 +1,42 @@
+{
+  "id": "list",
+  "type": "SharedSlice",
+  "name": "List",
+  "description": "List",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": "List Title"
+          }
+        },
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "Items",
+            "repeat": true,
+            "fields": {
+              "list_item": {
+                "type": "Text",
+                "config": {
+                  "label": "List Item",
+                  "placeholder": "List Ite"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

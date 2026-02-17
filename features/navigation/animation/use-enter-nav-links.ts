@@ -19,7 +19,7 @@ export const useEnterNavLinks = (ref: RefObject<HTMLDivElement | null>) => {
       });
 
       gsap.from(split.words, {
-        y: "100%",
+        y: "105%",
         stagger: 0.1,
         duration: 0.8,
         ease: "power2.out",

@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { createContext, useContext, useState } from "react";
 
 type AppStateContextType = {
@@ -7,10 +8,12 @@ type AppStateContextType = {
   setPreloadComplete: (value: boolean) => void;
   introComplete: boolean;
   setIntroComplete: (value: boolean) => void;
-  transitionCount: number;
-  incrementTransitionCount: () => void;
-  transitionStartCount: number;
-  incrementTransitionStartCount: () => void;
+  navIsVisible: boolean;
+  setNavIsVisible: (value: boolean) => void;
+  isTransitioning: boolean;
+  setIsTransitioning: (value: boolean) => void;
+  previousPathname: string;
+  pageVisible: boolean | null;
 };
 
 const AppStateContext = createContext<AppStateContextType | undefined>(
@@ -18,16 +21,14 @@ const AppStateContext = createContext<AppStateContextType | undefined>(
 );
 
 export function AppStateProvider({ children }: { children: React.ReactNode }) {
-  const [preloadComplete, setPreloadComplete] = useState(false);
-  const [introComplete, setIntroComplete] = useState(false);
-  const [transitionCount, setTransitionCount] = useState<number>(0);
-  const [transitionStartCount, setTransitionStartCount] = useState<number>(0);
-
-  const incrementTransitionCount = () =>
-    setTransitionCount((count) => count + 1);
-
-  const incrementTransitionStartCount = () =>
-    setTransitionStartCount((count) => count + 1);
+  const [preloadComplete, setPreloadComplete] = useState(true);
+  const [introComplete, setIntroComplete] = useState(true);
+  const [navIsVisible, setNavIsVisible] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [previousPathname] = useState(usePathname());
+  const pageVisible = !introComplete
+    ? null // uninitialized
+    : !navIsVisible && !isTransitioning; // true or false
 
   return (
     <AppStateContext
@@ -36,10 +37,12 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
         setPreloadComplete,
         introComplete,
         setIntroComplete,
-        transitionCount,
-        incrementTransitionCount,
-        transitionStartCount,
-        incrementTransitionStartCount,
+        navIsVisible,
+        setNavIsVisible,
+        isTransitioning,
+        setIsTransitioning,
+        previousPathname,
+        pageVisible,
       }}
     >
       {children}

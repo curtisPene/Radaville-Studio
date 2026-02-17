@@ -1,12 +1,12 @@
 "use client";
 
-import { useNav } from "@/context/nav-context";
-import { useStartTransition } from "@/components/ui/transition-link/use-start-transition";
+import { useStartTransition } from "@/hooks/use-start-transition";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { usePathname, useRouter } from "next/navigation";
 import { useRef } from "react";
+import { useAppState } from "@/context/app-state-context";
 
 gsap.registerPlugin(SplitText);
 
@@ -14,7 +14,7 @@ export const useAnimateLink = () => {
   const ref = useRef<HTMLAnchorElement>(null);
   const router = useRouter();
   const pathname = usePathname();
-  const { setIsVisible } = useNav();
+  const { setNavIsVisible } = useAppState();
   const startTransition = useStartTransition();
 
   useGSAP(
@@ -36,7 +36,7 @@ export const useAnimateLink = () => {
         const tween = gsap.to(split.chars, {
           paused: true,
           rotateY: 180,
-          duration: 0.4,
+          duration: 0.3,
           stagger: 0.1,
           ease: "power2.inOut",
           transformOrigin: "center center",
@@ -44,7 +44,7 @@ export const useAnimateLink = () => {
 
         tween.play().then(() => {
           startTransition(() => {
-            setIsVisible(false);
+            setNavIsVisible(false);
             if (pathname !== target.dataset.href) {
               router.push(target.dataset.href as string);
             }

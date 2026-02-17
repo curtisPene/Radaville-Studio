@@ -1,4 +1,4 @@
-import { Body } from "@/components/typography/body";
+import { Label } from "@/components/typography/label";
 import { NavigationDocumentData } from "@/prismicio-types";
 import { useRef } from "react";
 import { useEnterNavFooter } from "../animation/use-enter-nav-footer";
@@ -16,12 +16,12 @@ export const NavFooter = ({
       data-component="nav-footer"
       className="flex flex-row justify-between"
     >
-      <Body inline sub faded>
+      <Label inline sub faded>
         {pageData.left_text}
-      </Body>
-      <Body inline sub faded>
+      </Label>
+      <Label inline sub faded>
         {pageData.right_text}
-      </Body>
+      </Label>
     </div>
   );
 };

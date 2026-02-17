@@ -19,7 +19,7 @@ export const useCarousel = (ref: RefObject<HTMLDivElement | null>) => {
       const forwardTl = gsap
         .timeline()
         .to(slides, {
-          translateZ: (i) => (i === 4 ? "+=280px" : "+=140px"),
+          translateZ: (i) => (i === 4 ? "+=420px" : "+=140px"),
           duration: 0.6,
           ease: "power2.inOut",
         })
@@ -42,7 +42,7 @@ export const useCarousel = (ref: RefObject<HTMLDivElement | null>) => {
     const backwardTl = gsap
       .timeline()
       .to(slides, {
-        translateZ: (i) => (i === 1 ? "-=280px" : "-=140px"),
+        translateZ: (i) => (i === 1 ? "-=420px" : "-=140px"),
         duration: 0.6,
         ease: "power2.inOut",
       })

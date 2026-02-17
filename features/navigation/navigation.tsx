@@ -10,7 +10,7 @@ export const Navigation = () => {
   return (
     <div
       data-page="navigation"
-      className="fixed inset-0 bg-black p-[3vw] flex flex-col"
+      className="fixed inset-0 bg-black p-[3vw] flex flex-col z-14"
       style={{ color: "#fff" }}
     >
       <NavHeader />

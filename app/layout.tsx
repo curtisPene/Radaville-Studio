@@ -2,9 +2,16 @@ import { Metadata } from "next";
 import { Old_Standard_TT, Inter_Tight } from "next/font/google";
 import "./globals.css";
 import { ViewTransitions } from "next-view-transitions";
-import { NavProvider } from "@/context/nav-context";
 import { AppStateProvider } from "@/context/app-state-context";
+import { LayoutAnimProvider } from "@/context/layout-anim-context";
 import { NavigationWrapper } from "@/components/navigation-wrapper/navigation-wrapper";
+import localFont from "next/font/local";
+import { SmoothScroll } from "@/components/lenis/SmoothScroll";
+
+const neueWorldRegular = localFont({
+  src: "../public/fonts/PPNeueWorld-SuperCondensedLight.woff2",
+  variable: "--font-neue-world",
+});
 
 export const metadata: Metadata = {
   icons: {
@@ -32,16 +39,17 @@ export default async function RootLayout({
   return (
     <ViewTransitions>
       <AppStateProvider>
-        <NavProvider>
-          <html lang="en">
-            <body
-              className={`${oldStandardTT.variable} ${interTight.variable} antialiased relative bg-black`}
-            >
+        <html lang="en">
+          <body
+            className={`${neueWorldRegular.variable} ${oldStandardTT.variable} ${interTight.variable} antialiased relative bg-black`}
+          >
+            <SmoothScroll />
+            <LayoutAnimProvider>
               {children}
               <NavigationWrapper />
-            </body>
-          </html>
-        </NavProvider>
+            </LayoutAnimProvider>
+          </body>
+        </html>
       </AppStateProvider>
     </ViewTransitions>
   );

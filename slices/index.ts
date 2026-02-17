@@ -3,5 +3,8 @@
 import dynamic from "next/dynamic";
 
 export const components = {
+  gallery_image: dynamic(() => import("./GalleryImage")),
+  list: dynamic(() => import("./List")),
   nav_info_section: dynamic(() => import("./NavInfoSection")),
+  text_block: dynamic(() => import("./TextBlock")),
 };
