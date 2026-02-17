@@ -41,7 +41,6 @@ const textBlocks = getSlices(slices, "text_block");
 const galleryImages = getSlices(slices, "gallery_image");
 const firstSetImages = galleryImages.slice(0, 3);
 const secondSetImages = galleryImages.slice(4, 5);
-console.log(galleryImages);
 
 const aboutBlock = textBlocks.find((s) => s.primary.title === "About");
 const seaverBlock = textBlocks.find((s) => s.primary.title === "Seaver Rada");
