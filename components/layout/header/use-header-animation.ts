@@ -22,7 +22,7 @@ export const useHeaderAnimation = () => {
       .fromTo(
         "[data-component=header]",
         { opacity: 0 },
-        { opacity: 1, duration: 0.4 },
+        { opacity: 1, duration: 0.6 },
       ),
   );
 
@@ -32,7 +32,7 @@ export const useHeaderAnimation = () => {
       .fromTo(
         "[data-component=header]",
         { opacity: 1 },
-        { opacity: 0, duration: 0.4 },
+        { opacity: 0, duration: 0.6 },
       ),
   );
 

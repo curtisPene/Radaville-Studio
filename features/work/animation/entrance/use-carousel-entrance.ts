@@ -55,16 +55,16 @@ export const useCarouselEntrance = (ref: RefObject<HTMLDivElement | null>) => {
             firstVisibleSlide.style.clipPath = "none";
           },
         })
-        .to(firstImage, { scale: 1, duration: 0.4, ease: "power2.out" })
+        .to(firstImage, { scale: 1, duration: 0.6, ease: "power2.out" })
         .to(
           firstVisibleSlide,
-          { scale: 1, duration: 0.4, ease: "power2.out" },
+          { scale: 1, duration: 0.6, ease: "power2.out" },
           "<",
         )
         .fromTo(
           lastThreeVisibleSlides,
           { opacity: 0 },
-          { opacity: 1, duration: 0.4, ease: "power2.out" },
+          { opacity: 1, duration: 0.6, ease: "power2.out" },
           ">",
         )
         .fromTo(
@@ -72,7 +72,7 @@ export const useCarouselEntrance = (ref: RefObject<HTMLDivElement | null>) => {
           { translateZ: 0 },
           {
             translateZ: (i) => `-${(3 - i) * 140}px`,
-            duration: 0.4,
+            duration: 0.6,
             ease: "power2.out",
           },
           "<",
@@ -83,7 +83,7 @@ export const useCarouselEntrance = (ref: RefObject<HTMLDivElement | null>) => {
           split.words,
           {
             y: "100%",
-            duration: 0.4,
+            duration: 0.6,
             ease: "power2.out",
             onComplete: () => split.revert(),
           },
@@ -93,7 +93,7 @@ export const useCarouselEntrance = (ref: RefObject<HTMLDivElement | null>) => {
           slideInfo,
           {
             y: "",
-            duration: 0.4,
+            duration: 0.6,
             ease: "power2.out",
           },
           "<",

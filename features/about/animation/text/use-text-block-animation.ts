@@ -23,18 +23,18 @@ export const useTextBlockAnimation = () => {
           },
         })
         .from(h2Split.lines, {
-          y: "100%",
-          duration: 0.6,
-          stagger: 0.2,
+          y: "105%",
+          duration: 0.8,
+          stagger: 0.1,
           ease: "power2.out",
         })
         .from(
           pSplit.lines,
           {
             y: "100%",
-            duration: 0.6,
+            duration: 0.3,
             ease: "power2.out",
-            stagger: 0.2,
+            stagger: 0.1,
           },
           "-=0.2",
         );

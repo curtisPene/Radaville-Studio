@@ -28,12 +28,12 @@ export const useFooterAnimation = ({
       .fromTo(
         "[data-component=footer] ",
         { y: "100%" },
-        { y: 0, duration: 0.4 },
+        { y: 0, duration: 0.6 },
       );
   });
 
   const buildExit = contextSafe(() =>
-    gsap.timeline().to("[data-component=footer]", { y: "100%", duration: 0.4 }),
+    gsap.timeline().to("[data-component=footer]", { y: "100%", duration: 0.6 }),
   );
 
   useImperativeHandle(
@@ -52,7 +52,7 @@ export const useFooterAnimation = ({
         { y: "100%" },
         {
           y: 0,
-          duration: 0.4,
+          duration: 0.6,
           scrollTrigger: {
             trigger: ref.current,
             start: "bottom bottom ",
