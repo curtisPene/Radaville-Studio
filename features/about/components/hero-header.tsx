@@ -11,8 +11,12 @@ export const HeroHeader = () => {
       <div className="hero-header-root overflow-clip">
         <h1
           data-component="hero-header"
-          className="overflow-clip py-[2vw] font-serif leading-none"
-          style={{ fontSize: fluid(115, 146) }}
+          className="overflow-clip font-serif leading-none opacity-0"
+          style={{
+            fontSize: fluid(115, 146),
+            paddingTop: fluid(6, 12),
+            paddingBottom: fluid(6, 12),
+          }}
         >
           STUDIO PROFILE
         </h1>

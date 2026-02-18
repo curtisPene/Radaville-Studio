@@ -15,7 +15,11 @@ export const useHeroHeaderAnimation = () => {
 
   const enter = contextSafe(() => {
     return gsap
-      .timeline()
+      .timeline({
+        onStart: () => {
+          gsap.set("[data-component=hero-header]", { opacity: 1 });
+        },
+      })
       .fromTo(
         "[data-component=hero-header]",
         { y: "105%" },

@@ -36,12 +36,16 @@ export const useWorkOrchestrator = () => {
 export function WorkOrchestrator({ children }: { children: React.ReactNode }) {
   const carouselRef = useRef<CarouselAnimController>(null);
   const { headerRef, footerRef } = useLayoutAnimHandles();
+  const { introComplete, preloadComplete } = useAppState();
 
   useGSAP(
     () => {
       if (!carouselRef.current || !headerRef.current || !footerRef.current) {
         return console.error("WorkOrchestrator: missing ref");
       }
+
+      if (!introComplete || !preloadComplete) return;
+
       gsap
         .timeline({ delay: 1.4 })
         .add(
@@ -51,7 +55,7 @@ export function WorkOrchestrator({ children }: { children: React.ReactNode }) {
           ),
         );
     },
-    { dependencies: [] },
+    { dependencies: [introComplete, preloadComplete] },
   );
 
   return (

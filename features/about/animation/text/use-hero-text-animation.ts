@@ -29,6 +29,10 @@ export const useTextAnimation = () => {
 
     return gsap
       .timeline({
+        onStart: () => {
+          gsap.set("h1", { opacity: 1 });
+          gsap.set("p", { opacity: 1 });
+        },
         onComplete: () => {
           splitP.revert();
           splith2.revert();
@@ -43,13 +47,12 @@ export const useTextAnimation = () => {
       .from(
         splitP.lines,
         {
-          opacity: 0,
           y: "100%",
           duration: 0.3,
           stagger: 0.1,
           ease: "power2.out",
         },
-        "-=0.1",
+        ">-=0.1",
       );
   });
 

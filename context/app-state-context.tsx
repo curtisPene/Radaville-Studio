@@ -21,8 +21,8 @@ const AppStateContext = createContext<AppStateContextType | undefined>(
 );
 
 export function AppStateProvider({ children }: { children: React.ReactNode }) {
-  const [preloadComplete, setPreloadComplete] = useState(true);
-  const [introComplete, setIntroComplete] = useState(true);
+  const [preloadComplete, setPreloadComplete] = useState(false);
+  const [introComplete, setIntroComplete] = useState(false);
   const [navIsVisible, setNavIsVisible] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [previousPathname] = useState(usePathname());

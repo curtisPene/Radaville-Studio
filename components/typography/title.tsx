@@ -1,3 +1,4 @@
+import { fluid } from "@/lib/fluid";
 import clsx from "clsx";
 
 type titleVariant = "headline" | "title" | "subtitle";
@@ -9,15 +10,15 @@ const tagMap: Record<titleVariant, "h1" | "h2" | "h3"> = {
 };
 
 const sansSizeMap: Record<titleVariant, string> = {
-  headline: "var(--step--1)",
+  headline: "var(--step--3)",
   title: "var(--step--2)",
-  subtitle: "var(--step--3)",
+  subtitle: "var(--step--1)",
 };
 
 const serifSizeMap: Record<titleVariant, string> = {
-  headline: "var(--step-6)",
-  title: "var(--step-5)",
-  subtitle: "var(--step-4)",
+  headline: "var(--step-4)",
+  title: fluid(95, 120),
+  subtitle: "var(--step-6)",
 };
 
 type subtitleConfig = {

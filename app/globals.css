@@ -18,6 +18,11 @@
   /* Spacing Scale */
 }
 
+a:hover,
+button:hover {
+  cursor: pointer;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

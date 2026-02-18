@@ -13,3 +13,19 @@ export const fluid = (minSize: number, maxSize: number): string => {
   const intercept = minSize - slope * minVW;
   return `clamp(${minSize}px, ${parseFloat((slope * 100).toFixed(4))}vw + ${parseFloat(intercept.toFixed(4))}px, ${maxSize}px)`;
 };
+
+/**
+ * Returns a clamped pixel value using the same CSS Locks interpolation as fluid(),
+ * evaluated against the current viewport width. For use in JS/GSAP transforms.
+ *
+ * @example fluidPx(12, 20) → 16 (at 672px viewport)
+ */
+export const fluidPx = (minSize: number, maxSize: number): number => {
+  const minVW = 320;
+  const maxVW = 1024;
+  const vw = window.innerWidth;
+  const slope = (maxSize - minSize) / (maxVW - minVW);
+  const intercept = minSize - slope * minVW;
+  const value = slope * vw + intercept;
+  return Math.min(Math.max(value, minSize), maxSize);
+};

@@ -1,5 +1,6 @@
 "use client";
 
+import { useAppState } from "@/context/app-state-context";
 import { useLayoutAnimHandles } from "@/context/layout-anim-context";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -33,18 +34,27 @@ export function AboutOrchestrator({ children }: { children: React.ReactNode }) {
   const heroHeaderRef = useRef<AnimationController>(null);
   const heroTextRef = useRef<AnimationController>(null);
 
+  const { introComplete, preloadComplete, isTransitioning } = useAppState();
+
   useGSAP(
     () => {
-      if (!headerRef.current || !heroHeaderRef.current || !heroTextRef.current) {
+      if (
+        !headerRef.current ||
+        !heroHeaderRef.current ||
+        !heroTextRef.current
+      ) {
         return console.error("AboutOrchestrator: missing ref");
       }
+
+      if (!introComplete || !preloadComplete || isTransitioning) return;
+
       gsap
         .timeline({ delay: 1.4 })
         .add(headerRef.current.enter())
         .add(heroHeaderRef.current.enter())
         .add(heroTextRef.current.enter(), "-=0.4");
     },
-    { dependencies: [] },
+    { dependencies: [introComplete, preloadComplete, isTransitioning] },
   );
 
   return (

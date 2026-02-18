@@ -1,6 +1,7 @@
 "use client";
 
 import { useGalleryAnimation } from "@/components/layout/gallery/use-gallery-animation";
+import { fluid } from "@/lib/fluid";
 import { Content } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 
@@ -15,7 +16,7 @@ const GalleryItem = ({
   return (
     <div
       ref={ref}
-      className="relative h-[137vw] overflow-hidden"
+      className={`relative overflow-hidden h-[137vw] landscape:h-[48vw]`}
       style={{ backgroundColor }}
     >
       <PrismicNextImage
@@ -35,7 +36,10 @@ export const Gallery = ({
   backgroundColor?: string;
 }) => {
   return (
-    <div className="grid grid-cols-1 gap-[8vw]">
+    <div
+      className="grid grid-cols-1 w-full landscape:grid-cols-3 landscape:w-[90vw]"
+      style={{ gap: fluid(25, 30) }}
+    >
       {items.map((item) => (
         <GalleryItem
           key={item.primary.caption}

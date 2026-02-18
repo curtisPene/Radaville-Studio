@@ -7,6 +7,9 @@ import { LayoutAnimProvider } from "@/context/layout-anim-context";
 import { NavigationWrapper } from "@/components/navigation-wrapper/navigation-wrapper";
 import localFont from "next/font/local";
 import { SmoothScroll } from "@/components/lenis/SmoothScroll";
+import { SplashWrapper } from "@/features/loader/components/splash-wrapper";
+import Script from "next/script";
+import { NoScrollRestoration } from "@/components/no-scroll-restoration/no-scroll-restoration";
 
 const neueWorldRegular = localFont({
   src: "../public/fonts/PPNeueWorld-SuperCondensedLight.woff2",
@@ -43,6 +46,8 @@ export default async function RootLayout({
           <body
             className={`${neueWorldRegular.variable} ${oldStandardTT.variable} ${interTight.variable} antialiased relative bg-black`}
           >
+            <NoScrollRestoration />
+            <SplashWrapper />
             <SmoothScroll />
             <LayoutAnimProvider>
               {children}

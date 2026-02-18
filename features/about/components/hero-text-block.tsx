@@ -5,6 +5,7 @@ import { PrismicRichText } from "@prismicio/react";
 import { Content } from "@prismicio/client";
 import { Body } from "@/components/typography/body";
 import { Title } from "@/components/typography/title";
+import { fluid } from "@/lib/fluid";
 
 interface HeroTextBlockProps {
   slice: Content.TextBlockSlice;
@@ -17,13 +18,21 @@ export const HeroTextBlock = ({ slice }: HeroTextBlockProps) => {
     <section
       ref={ref}
       data-component="hero-text"
-      className="flex flex-col gap-[4vw] pb-[14vw]"
+      className="flex flex-col"
+      style={{
+        gap: fluid(12, 16),
+        paddingBottom: fluid(22, 40),
+      }}
     >
-      <Title as="headline">({slice.primary.title})</Title>
+      <Title as="headline" className="opacity-0">
+        ({slice.primary.title})
+      </Title>
       <PrismicRichText
         field={slice.primary.content}
         components={{
-          paragraph: ({ children }) => <Body>{children}</Body>,
+          paragraph: ({ children }) => (
+            <Body className="opacity-0">{children}</Body>
+          ),
         }}
       />
     </section>
