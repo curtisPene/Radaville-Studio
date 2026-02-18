@@ -10,6 +10,7 @@ import clsx from "clsx";
 import { CarouselFooter } from "./carousel-footer";
 import { Footer } from "@/components/layout/footer/footer";
 import { Label } from "@/components/typography/label";
+import { fluid } from "@/lib/fluid";
 
 const Slide = ({
   translateZ,
@@ -24,8 +25,7 @@ const Slide = ({
   faded?: boolean;
   clipped?: boolean;
 }) => {
-  const baseClass =
-    "absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-full h-[45vw] overflow-clip";
+  const baseClass = "absolute top-0 left-0 w-full h-full overflow-clip";
   return (
     <div
       data-component="slide"
@@ -38,7 +38,8 @@ const Slide = ({
       />
       <h3
         key={title}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-serif text-[12vw] leading-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-serif leading-none"
+        style={{ fontSize: fluid(38, 64) }}
       >
         {title}
       </h3>
@@ -75,6 +76,7 @@ export function Carousel({ data: projectSlideData }: { data: ProjectSlide[] }) {
           <div
             data-animate-component="slide-year"
             className="h-[3.8vw] overflow-clip"
+            style={{ height: "var(--step-0)" }}
           >
             <Label>{projectSlideData[currentSlideDataIndex].year}</Label>
             <Label>####</Label>
@@ -91,7 +93,13 @@ export function Carousel({ data: projectSlideData }: { data: ProjectSlide[] }) {
         </div>
       </div>
       <div data-component="carousel" className="flex-1 relative">
-        <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 transform-3d perspective-[3000px] perspective-origin-[50%_-75%] w-full h-[45vw]">
+        <div
+          className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 transform-3d perspective-[3000px] perspective-origin-[50%_-75%] aspect-294/144"
+          style={{
+            width: fluid(294, 664),
+            height: fluid(144, 315),
+          }}
+        >
           {Z_OFFSETS.map((offset, index) => {
             const slide = slides[index];
             return (

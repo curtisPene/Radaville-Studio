@@ -1,3 +1,4 @@
+import { fluid } from "@/lib/fluid";
 import clsx from "clsx";
 
 type BodyConfig = {
@@ -5,6 +6,13 @@ type BodyConfig = {
   children?: React.ReactNode;
 } & React.HTMLAttributes<HTMLSpanElement>;
 
-export const Body = ({ className = "text-[4vw]", children }: BodyConfig) => {
-  return <p className={clsx(className)}>{children}</p>;
+export const Body = ({ className = "", children }: BodyConfig) => {
+  return (
+    <p
+      className={clsx("leading-tight", className)}
+      style={{ fontSize: fluid(12, 16) }}
+    >
+      {children}
+    </p>
+  );
 };

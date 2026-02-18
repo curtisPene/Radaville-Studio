@@ -30,7 +30,6 @@ export const Label = ({
       className={clsx(
         underline && "underline",
         inline ? "inline" : "block",
-        sub ? "text-[3.25vw]" : caption ? "text-[2.5vw]" : "text-[3.75vw]",
         "font-sans",
         leadingNone && "leading-none",
         "leading-tight",
@@ -38,6 +37,11 @@ export const Label = ({
       )}
       style={{
         opacity: faded ? 0.5 : 1,
+        fontSize: sub
+          ? "var(--step--2)"
+          : caption
+            ? "var(--step--1)"
+            : "var(--step-0)",
       }}
     >
       {children}

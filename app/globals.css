@@ -3,6 +3,19 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Type scale */
+  --step--2: clamp(0.4167rem, 0.3515rem + 0.3258vw, 0.56rem);
+  --step--1: clamp(0.5rem, 0.4091rem + 0.4545vw, 0.7rem);
+  --step-0: clamp(0.6rem, 0.475rem + 0.625vw, 0.875rem);
+  --step-1: clamp(0.9rem, 0.8rem + 0.5vw, 1.25rem);
+  --step-2: clamp(1.08rem, 0.9421rem + 0.6893vw, 1.5625rem);
+  --step-3: clamp(1.296rem, 1.1083rem + 0.9388vw, 1.9531rem);
+  --step-4: clamp(0.64rem, 6.2346rem + -6.2162vw, 4.9913rem);
+  --step-5: clamp(0.8rem, 7.4723rem + -7.4137vw, 5.9896rem);
+  --step-6: clamp(1rem, 8.9554rem + -8.8393vw, 7.1875rem);
+
+  /* Spacing Scale */
 }
 
 @theme inline {
@@ -22,6 +35,8 @@
   --breakpoint-2xl: 1440px;
   --breakpoint-3xl: 2560px;
 }
+
+@custom-variant landscape (@media (aspect-ratio > 1));
 
 @media (prefers-color-scheme: dark) {
   :root {

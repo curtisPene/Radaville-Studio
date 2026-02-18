@@ -19,7 +19,7 @@ export const useHeroHeaderAnimation = () => {
       .fromTo(
         "[data-component=hero-header]",
         { y: "105%" },
-        { y: 0, duration: 0.6, ease: "power2.out" },
+        { y: 0, duration: 0.8, ease: "power2.out" },
       );
   });
 

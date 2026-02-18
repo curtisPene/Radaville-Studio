@@ -19,11 +19,11 @@ export const NavHeader = () => {
     <div
       ref={ref}
       data-component="nav-header"
-      className="flex flex-row items-center justify-between"
+      className="flex flex-row items-start justify-between"
     >
       <WordMark />
       <button onClick={handleNavClose}>
-        <XIcon stroke="#fff" className="w-[6vw] h-6vw]" />
+        <XIcon stroke="#fff" />
       </button>
     </div>
   );

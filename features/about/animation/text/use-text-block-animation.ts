@@ -21,6 +21,10 @@ export const useTextBlockAnimation = () => {
             trigger: ref.current,
             start: "top 70%",
           },
+          onComplete: () => {
+            pSplit.revert();
+            h2Split.revert();
+          },
         })
         .from(h2Split.lines, {
           y: "105%",

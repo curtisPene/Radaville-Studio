@@ -5,6 +5,7 @@ import { LogoMark } from "@/components/brand/logo-mark";
 import { Label } from "@/components/typography/label";
 import { useHeaderAnimation } from "@/components/layout/header/use-header-animation";
 import { NavButton } from "@/features/navigation/components/nav-button";
+import { fluid } from "@/lib/fluid";
 
 interface HeaderConfig {
   pageNumber: string;
@@ -19,7 +20,10 @@ export const Header = ({ pageNumber, pageTitle }: HeaderConfig) => {
       <header
         ref={ref}
         data-component="header"
-        className="flex flex-row items-start justify-between fixed left-0 top-0 right-0 p-[3vw] opacity-0 z-7"
+        className="flex flex-row items-start justify-between fixed left-0 top-0 right-0 opacity-0 z-7"
+        style={{
+          padding: fluid(9, 18),
+        }}
       >
         <div className="flex flex-row gap-[3vw]">
           <WordMark />

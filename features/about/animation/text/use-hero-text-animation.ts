@@ -22,16 +22,22 @@ export const useTextAnimation = () => {
       mask: "lines",
     });
 
-    const splith2 = new SplitText("h2", {
+    const splith2 = new SplitText("h1", {
       type: "words",
       mask: "words",
     });
 
     return gsap
-      .timeline()
+      .timeline({
+        onComplete: () => {
+          splitP.revert();
+          splith2.revert();
+        },
+      })
       .from(splith2.words, {
         y: "100%",
-        duration: 0.6,
+        duration: 0.3,
+        stagger: 0.1,
         ease: "power2.out",
       })
       .from(
@@ -39,11 +45,11 @@ export const useTextAnimation = () => {
         {
           opacity: 0,
           y: "100%",
-          duration: 0.6,
-          stagger: 0.2,
+          duration: 0.3,
+          stagger: 0.1,
           ease: "power2.out",
         },
-        "-=0.2",
+        "-=0.1",
       );
   });
 

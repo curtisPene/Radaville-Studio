@@ -12,7 +12,7 @@ export const NavButton = () => {
   };
   return (
     <button onClick={handleClick} data-component="nav-button">
-      <MenuIcon className="h-[6vw] w-[6vw]" />
+      <MenuIcon className="h-[clamp(19px,6vw,24px)] w-[clamp(19px,6vw,24px)]" />
     </button>
   );
 };

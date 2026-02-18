@@ -65,9 +65,11 @@ export default function AboutPage() {
         <HeroHeader />
         {aboutBlock && <HeroTextBlock slice={aboutBlock} />}
         <Gallery items={firstSetImages} />
-        {seaverBlock && <TextBlock slice={seaverBlock} displayHeader />}
+        {seaverBlock && (
+          <TextBlock slice={seaverBlock} sizing="title" wordbreak />
+        )}
         <Gallery items={secondSetImages} />
-        {outroBlock && <TextBlock slice={outroBlock} condensedHeader />}
+        {outroBlock && <TextBlock slice={outroBlock} sizing="title" />}
         <AboutOutro footer_image={footer_image} />
         <AboutFooter />
       </PageLayout>

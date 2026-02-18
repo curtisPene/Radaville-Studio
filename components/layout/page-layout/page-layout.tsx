@@ -1,4 +1,5 @@
 import { Header } from "@/components/layout/header/header";
+import { fluid } from "@/lib/fluid";
 import { ReactNode } from "react";
 
 interface PageLayoutProps {
@@ -30,7 +31,7 @@ export function PageLayout({
         background: backgroundColor,
         color: fontColor,
         height: height,
-        padding: "14vw 3vw 3vw",
+        padding: `${fluid(44, 66)} ${fluid(9, 18)} ${fluid(9, 18)}`,
         display: "flex",
         flexDirection: "column",
         overflow: "clip",

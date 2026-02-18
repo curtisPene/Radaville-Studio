@@ -1,15 +1,13 @@
 "use client";
 
-interface LogoMarkConfig {
-  className?: string;
-}
+import { fluid } from "@/lib/fluid";
 
-export const LogoMark = ({ className = "w-[6vw] h-[8vw]" }: LogoMarkConfig) => {
+export const LogoMark = () => {
   return (
     <svg
       viewBox="0 0 258 348"
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
+      style={{ width: fluid(19, 30) }}
       fill="currentColor"
     >
       <g fillRule="evenodd">

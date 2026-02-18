@@ -4,35 +4,22 @@ import { useTextAnimation } from "@/features/about/animation/text/use-hero-text-
 import { PrismicRichText } from "@prismicio/react";
 import { Content } from "@prismicio/client";
 import { Body } from "@/components/typography/body";
-import clsx from "clsx";
+import { Title } from "@/components/typography/title";
 
 interface HeroTextBlockProps {
   slice: Content.TextBlockSlice;
-  displayHeader?: boolean;
 }
 
-export const HeroTextBlock = ({
-  slice,
-  displayHeader = false,
-}: HeroTextBlockProps) => {
+export const HeroTextBlock = ({ slice }: HeroTextBlockProps) => {
   const ref = useTextAnimation();
 
   return (
     <section
       ref={ref}
       data-component="hero-text"
-      className="flex flex-col gap-[4vw] py-[14vw]"
+      className="flex flex-col gap-[4vw] pb-[14vw]"
     >
-      <h2
-        className={clsx(
-          displayHeader ? "text-[12vw]" : "text-[3vw]",
-          displayHeader && "font-serif",
-        )}
-      >
-        {displayHeader
-          ? slice.primary.title?.split(" ").join("\n")
-          : `(${slice.primary.title})`}
-      </h2>
+      <Title as="headline">({slice.primary.title})</Title>
       <PrismicRichText
         field={slice.primary.content}
         components={{
