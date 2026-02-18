@@ -5,7 +5,7 @@ import { fluid } from "@/lib/fluid";
 export const AboutFooter = () => {
   return (
     <div
-      className="flex flex-col items-center gap-[12vw] w-full"
+      className="flex flex-col items-center w-full"
       style={{
         paddingTop: fluid(22, 40),
         gap: fluid(22, 40),

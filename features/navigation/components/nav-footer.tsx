@@ -16,10 +16,10 @@ export const NavFooter = ({
       data-component="nav-footer"
       className="flex flex-row justify-between"
     >
-      <Label inline sub faded>
+      <Label inline faded>
         {pageData.left_text}
       </Label>
-      <Label inline sub faded>
+      <Label inline faded>
         {pageData.right_text}
       </Label>
     </div>
