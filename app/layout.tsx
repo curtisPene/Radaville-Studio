@@ -3,6 +3,7 @@ import { Old_Standard_TT, Inter_Tight } from "next/font/google";
 import "./globals.css";
 import { ViewTransitions } from "next-view-transitions";
 import { AppStateProvider } from "@/context/app-state-context";
+import { NavProvider } from "@/context/nav-context";
 import { LayoutAnimProvider } from "@/context/layout-anim-context";
 import { NavigationWrapper } from "@/components/navigation-wrapper/navigation-wrapper";
 import localFont from "next/font/local";
@@ -42,19 +43,21 @@ export default async function RootLayout({
   return (
     <ViewTransitions>
       <AppStateProvider>
-        <html lang="en">
-          <body
-            className={`${neueWorldRegular.variable} ${oldStandardTT.variable} ${interTight.variable} antialiased relative bg-black`}
-          >
-            <NoScrollRestoration />
-            <SplashWrapper />
-            <SmoothScroll />
-            <LayoutAnimProvider>
-              {children}
-              <NavigationWrapper />
-            </LayoutAnimProvider>
-          </body>
-        </html>
+        <NavProvider>
+          <html lang="en">
+            <body
+              className={`${neueWorldRegular.variable} ${oldStandardTT.variable} ${interTight.variable} antialiased relative bg-black`}
+            >
+              <NoScrollRestoration />
+              <SplashWrapper />
+              <SmoothScroll />
+              <LayoutAnimProvider>
+                {children}
+                <NavigationWrapper />
+              </LayoutAnimProvider>
+            </body>
+          </html>
+        </NavProvider>
       </AppStateProvider>
     </ViewTransitions>
   );

@@ -1,10 +1,10 @@
 "use client";
 
-import { useAppState } from "@/context/app-state-context";
+import { useNav } from "@/context/nav-context";
 import { Navigation } from "@/features/navigation/navigation";
 
 export function NavigationWrapper() {
-  const { navIsVisible } = useAppState();
+  const { navIsVisible } = useNav();
 
   if (!navIsVisible) return null;
 

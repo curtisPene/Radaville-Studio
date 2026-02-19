@@ -1,19 +1,27 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  RefObject,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+
+export type OrchestratorControllerType = {
+  playEnter: () => void;
+};
 
 type AppStateContextType = {
   preloadComplete: boolean;
   setPreloadComplete: (value: boolean) => void;
   introComplete: boolean;
   setIntroComplete: (value: boolean) => void;
-  navIsVisible: boolean;
-  setNavIsVisible: (value: boolean) => void;
-  isTransitioning: boolean;
-  setIsTransitioning: (value: boolean) => void;
-  previousPathname: string;
-  pageVisible: boolean | null;
+  pageReady: boolean;
+  orchestratorRef: RefObject<OrchestratorControllerType | null>;
 };
 
 const AppStateContext = createContext<AppStateContextType | undefined>(
@@ -23,12 +31,37 @@ const AppStateContext = createContext<AppStateContextType | undefined>(
 export function AppStateProvider({ children }: { children: React.ReactNode }) {
   const [preloadComplete, setPreloadComplete] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
-  const [navIsVisible, setNavIsVisible] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [previousPathname] = useState(usePathname());
-  const pageVisible = !introComplete
-    ? null // uninitialized
-    : !navIsVisible && !isTransitioning; // true or false
+  const pathname = usePathname();
+  const isPopStateRef = useRef(false);
+
+  const orchestratorRef = useRef<OrchestratorControllerType | null>(null);
+
+  const pageReady = preloadComplete && introComplete;
+
+  useEffect(() => {
+    const handlePopState = () => {
+      isPopStateRef.current = true;
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  useEffect(() => {
+    if (isPopStateRef.current) {
+      isPopStateRef.current = false;
+      document.fonts.ready.then(() =>
+        setTimeout(() => {
+          orchestratorRef.current?.playEnter();
+        }, 1500),
+      );
+    }
+  }, [pathname]);
+
+  useLayoutEffect(() => {
+    if (pageReady) {
+      orchestratorRef.current?.playEnter();
+    }
+  }, [pageReady]);
 
   return (
     <AppStateContext
@@ -37,12 +70,8 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
         setPreloadComplete,
         introComplete,
         setIntroComplete,
-        navIsVisible,
-        setNavIsVisible,
-        isTransitioning,
-        setIsTransitioning,
-        previousPathname,
-        pageVisible,
+        pageReady,
+        orchestratorRef,
       }}
     >
       {children}
