@@ -11,7 +11,7 @@ import { useImperativeHandle, useRef } from "react";
 export const useHeroHeaderAnimation = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { heroHeaderRef } = useAboutOrchestrator();
-  const { contextSafe } = useGSAP({ scope: ref });
+  const { contextSafe } = useGSAP({ scope: ref, dependencies: [] });
 
   const enter = contextSafe(() => {
     return gsap

@@ -8,7 +8,7 @@ import { RefObject } from "react";
 gsap.registerPlugin(SplitText);
 
 export const useCarouselEntrance = (ref: RefObject<HTMLDivElement | null>) => {
-  const { contextSafe } = useGSAP({ scope: ref });
+  const { contextSafe } = useGSAP({ scope: ref, dependencies: [] });
 
   return contextSafe(
     (

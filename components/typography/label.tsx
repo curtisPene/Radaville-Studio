@@ -38,7 +38,7 @@ export const Label = ({
       style={{
         opacity: faded ? 0.5 : 1,
         fontSize: sub
-          ? "var(--step--2)"
+          ? "var(--step--3)"
           : caption
             ? "var(--step--1)"
             : "var(--step-0)",

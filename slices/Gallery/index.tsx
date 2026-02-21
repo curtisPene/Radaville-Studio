@@ -3,21 +3,20 @@ import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 
 /**
- * Props for `GalleryImage`.
+ * Props for `Gallery`.
  */
-export type GalleryImageProps = SliceComponentProps<Content.GalleryImageSlice>;
+export type GalleryProps = SliceComponentProps<Content.GallerySlice>;
 
 /**
- * Component for "GalleryImage" Slices.
+ * Component for "Gallery" Slices.
  */
-const GalleryImage: FC<GalleryImageProps> = ({ slice }) => {
+const Gallery: FC<GalleryProps> = ({ slice }) => {
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      Placeholder component for gallery_image (variation: {slice.variation})
-      slices.
+      Placeholder component for gallery (variation: {slice.variation}) slices.
       <br />
       <strong>You can edit this slice directly in your code editor.</strong>
       {/**
@@ -28,4 +27,4 @@ const GalleryImage: FC<GalleryImageProps> = ({ slice }) => {
   );
 };
 
-export default GalleryImage;
+export default Gallery;

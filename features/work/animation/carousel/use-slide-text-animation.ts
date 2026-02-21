@@ -9,8 +9,10 @@ gsap.registerPlugin(SplitText);
 
 type Direction = "forward" | "backward";
 
-export const useSlideTextAnimation = (ref: RefObject<HTMLDivElement | null>) => {
-  const { contextSafe } = useGSAP({ scope: ref });
+export const useSlideTextAnimation = (
+  ref: RefObject<HTMLDivElement | null>,
+) => {
+  const { contextSafe } = useGSAP({ scope: ref, dependencies: [] });
 
   return contextSafe((direction: Direction): gsap.core.Timeline => {
     const slides = gsap.utils.toArray<HTMLDivElement>("[data-component=slide]");

@@ -1,21 +1,17 @@
 "use client";
 
-import { useStartTransition } from "@/hooks/use-start-transition";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
-import { usePathname, useRouter } from "next/navigation";
 import { useRef } from "react";
-import { useAppState } from "@/context/app-state-context";
+import { useNav } from "@/context/nav-context";
 
 gsap.registerPlugin(SplitText);
 
 export const useAnimateLink = () => {
   const ref = useRef<HTMLAnchorElement>(null);
-  const router = useRouter();
-  const pathname = usePathname();
-  const { setNavIsVisible } = useAppState();
-  const startTransition = useStartTransition();
+
+  const { navigate } = useNav();
 
   useGSAP(
     () => {
@@ -43,12 +39,7 @@ export const useAnimateLink = () => {
         });
 
         tween.play().then(() => {
-          startTransition(() => {
-            setNavIsVisible(false);
-            if (pathname !== target.dataset.href) {
-              router.push(target.dataset.href as string);
-            }
-          });
+          navigate(target.dataset.href as string);
         });
       };
     },

@@ -11,7 +11,7 @@ export const WordMark = ({ header = true }: WordMarkConfig) => {
     <svg
       viewBox="0 0 271 117"
       fill="currentColor"
-      style={{ width: header ? fluid(48, 82) : fluid(120, 240) }}
+      style={{ width: header ? fluid(48, 82) : fluid(120, 280) }}
       xmlns="http://www.w3.org/2000/svg"
     >
       <g>

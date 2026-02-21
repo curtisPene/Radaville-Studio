@@ -6,6 +6,7 @@ import {
   PrismicText,
 } from "@prismicio/react";
 import { Body } from "@/components/typography/body";
+import { Heading } from "@/components/typography/heading";
 
 /**
  * Props for `TextBlock`.
@@ -21,15 +22,9 @@ const TextBlock: FC<TextBlockProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="flex flex-col gap-[4vw] py-[14vw]"
     >
-      <h2 className="text-[3.5vw]">({slice.primary.title})</h2>
-      <PrismicRichText
-        field={slice.primary.content}
-        components={{
-          paragraph: ({ children }) => <Body>{children}</Body>,
-        }}
-      />
+      <Heading as="h2">{slice.primary.title}</Heading>
+      <PrismicRichText field={slice.primary.content} />
     </section>
   );
 };

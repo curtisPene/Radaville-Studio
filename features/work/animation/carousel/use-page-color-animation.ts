@@ -7,15 +7,17 @@ import { ProjectSlide } from "@/lib/prismic-service";
 type Direction = "forward" | "backward";
 
 export const usePageColorAnimation = (projectSlideData: ProjectSlide[]) => {
-  const { contextSafe } = useGSAP();
+  const { contextSafe } = useGSAP({ dependencies: [] });
 
-  return contextSafe((direction: Direction, nextIndex: number): gsap.core.Timeline => {
-    const color = projectSlideData[nextIndex].backgroundColor;
+  return contextSafe(
+    (direction: Direction, nextIndex: number): gsap.core.Timeline => {
+      const color = projectSlideData[nextIndex].backgroundColor;
 
-    return gsap.timeline().to("[data-page]", {
-      background: color,
-      duration: 0.6,
-      ease: "power2.inOut",
-    });
-  });
+      return gsap.timeline().to("[data-page]", {
+        background: color,
+        duration: 0.6,
+        ease: "power2.inOut",
+      });
+    },
+  );
 };

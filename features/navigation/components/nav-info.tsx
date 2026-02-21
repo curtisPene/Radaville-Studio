@@ -1,5 +1,4 @@
 import { NavigationDocumentData } from "@/prismicio-types";
-import NavInfoSection from "@/slices/NavInfoSection";
 import { SliceZone } from "@prismicio/react";
 import { useRef } from "react";
 import { useEnterNavInfo } from "../animation/use-enter-nav-info";
@@ -19,11 +18,6 @@ export const NavInfo = ({ pageData }: { pageData: NavigationDocumentData }) => {
         paddingBottom: fluid(38, 40),
         gap: fluid(6, 8),
       }}
-    >
-      <SliceZone
-        slices={pageData.slices}
-        components={{ nav_info_section: NavInfoSection }}
-      />
-    </div>
+    ></div>
   );
 };

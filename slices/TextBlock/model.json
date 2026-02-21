@@ -19,13 +19,6 @@
             "placeholder": "Content title"
           }
         },
-        "subtitle": {
-          "type": "Text",
-          "config": {
-            "label": "Subtitle",
-            "placeholder": "Secondary title"
-          }
-        },
         "content": {
           "type": "StructuredText",
           "config": {

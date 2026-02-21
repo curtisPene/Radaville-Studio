@@ -2,11 +2,21 @@
 
 import { FooterAnimController } from "@/components/layout/footer/use-footer-animaiton";
 import { HeaderAnimController } from "@/components/layout/header/use-header-animation";
-import { useAppState } from "@/context/app-state-context";
+import {
+  OrchestratorControllerType,
+  useAppState,
+} from "@/context/app-state-context";
 import { useLayoutAnimHandles } from "@/context/layout-anim-context";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { createContext, useContext, useRef, RefObject } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useRef,
+  RefObject,
+  useImperativeHandle,
+} from "react";
 
 export type CarouselAnimController = {
   enter: (
@@ -36,10 +46,12 @@ export const useWorkOrchestrator = () => {
 export function WorkOrchestrator({ children }: { children: React.ReactNode }) {
   const carouselRef = useRef<CarouselAnimController>(null);
   const { headerRef, footerRef } = useLayoutAnimHandles();
-  const { introComplete, preloadComplete } = useAppState();
+  const { introComplete, preloadComplete, orchestratorRef } = useAppState();
 
-  useGSAP(
-    () => {
+  const { contextSafe } = useGSAP({ dependencies: [] });
+
+  useImperativeHandle(orchestratorRef, (): OrchestratorControllerType => {
+    const enter = contextSafe(() => {
       if (!carouselRef.current || !headerRef.current || !footerRef.current) {
         return console.error("WorkOrchestrator: missing ref");
       }
@@ -47,16 +59,18 @@ export function WorkOrchestrator({ children }: { children: React.ReactNode }) {
       if (!introComplete || !preloadComplete) return;
 
       gsap
-        .timeline({ delay: 1.4 })
+        .timeline()
         .add(
           carouselRef.current.enter(
             headerRef.current.enter,
             footerRef.current.enter,
           ),
         );
-    },
-    { dependencies: [introComplete, preloadComplete] },
-  );
+    });
+    return {
+      playEnter: enter,
+    };
+  });
 
   return (
     <WorkOrchestratorContext value={{ carouselRef }}>

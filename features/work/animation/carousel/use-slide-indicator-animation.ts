@@ -6,8 +6,10 @@ import gsap from "gsap";
 
 type Direction = "forward" | "backward";
 
-export const useSlideIndicatorAnimation = (ref: RefObject<HTMLDivElement | null>) => {
-  const { contextSafe } = useGSAP({ scope: ref });
+export const useSlideIndicatorAnimation = (
+  ref: RefObject<HTMLDivElement | null>,
+) => {
+  const { contextSafe } = useGSAP({ scope: ref, dependencies: [] });
 
   return contextSafe(
     (_direction: Direction, nextIndex: number): gsap.core.Timeline => {

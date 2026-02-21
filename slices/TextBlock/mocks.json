@@ -18,11 +18,6 @@
 				"__TYPE__": "FieldContent",
 				"value": "tongue",
 				"type": "Text"
-			},
-			"subtitle": {
-				"__TYPE__": "FieldContent",
-				"value": "shelf",
-				"type": "Text"
 			}
 		},
 		"items": []

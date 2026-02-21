@@ -20,7 +20,7 @@ export const useFooterAnimation = ({
 }) => {
   const { footerRef } = useLayoutAnimHandles();
   const ref = useRef<HTMLDivElement>(null);
-  const { contextSafe } = useGSAP({ scope: ref });
+  const { contextSafe } = useGSAP({ scope: ref, dependencies: [] });
 
   const buildEntrance = contextSafe(() => {
     return gsap

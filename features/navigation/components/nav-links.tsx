@@ -12,9 +12,9 @@ export const NavLinks = () => {
       className="font-serif text-white flex flex-col flex-1 justify-end"
     >
       <TransitionLink path="/">Work</TransitionLink>
-      <TransitionLink path="/">Curation</TransitionLink>
+      <TransitionLink path="/curation">Curation</TransitionLink>
       <TransitionLink path="/about">About</TransitionLink>
-      <TransitionLink path="/">Contact</TransitionLink>
+      <TransitionLink path="/contact">Contact</TransitionLink>
     </nav>
   );
 };

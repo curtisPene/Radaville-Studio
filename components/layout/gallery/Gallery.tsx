@@ -9,40 +9,43 @@ const GalleryItem = ({
   item,
   backgroundColor,
 }: {
-  item: Content.GalleryImageSlice;
+  item: Content.GallerySliceDefaultPrimaryGalleryItemsItem;
   backgroundColor?: string;
 }) => {
   const ref = useGalleryAnimation();
   return (
     <div
       ref={ref}
-      className={`relative overflow-hidden h-[137vw] landscape:h-[48vw]`}
-      style={{ backgroundColor }}
+      className={`relative overflow-hidden w-full`}
+      style={{
+        backgroundColor,
+        height: fluid(440, 640),
+      }}
     >
-      <PrismicNextImage
-        field={item.primary.image}
-        fill
-        className="object-cover"
-      />
+      <PrismicNextImage field={item.image} fill className="object-cover" />
     </div>
   );
 };
 
 export const Gallery = ({
-  items,
+  slice,
   backgroundColor,
 }: {
-  items: Content.GalleryImageSlice[];
+  slice: Content.GallerySlice;
   backgroundColor?: string;
 }) => {
+  if (!slice?.primary?.gallery_items) {
+    return null;
+  }
+
   return (
     <div
-      className="grid grid-cols-1 w-full landscape:grid-cols-3 landscape:w-[90vw]"
+      className="grid grid-cols-1 w-full landscape:grid-cols-3"
       style={{ gap: fluid(25, 30) }}
     >
-      {items.map((item) => (
+      {slice.primary.gallery_items.map((item) => (
         <GalleryItem
-          key={item.primary.caption}
+          key={item.caption}
           item={item}
           backgroundColor={backgroundColor}
         />

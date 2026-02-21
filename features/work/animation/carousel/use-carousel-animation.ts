@@ -7,7 +7,7 @@ import gsap from "gsap";
 type Direction = "forward" | "backward";
 
 export const useCarousel = (ref: RefObject<HTMLDivElement | null>) => {
-  const { contextSafe } = useGSAP({ scope: ref });
+  const { contextSafe } = useGSAP({ scope: ref, dependencies: [] });
 
   return contextSafe((direction: Direction): gsap.core.Timeline => {
     const slides = gsap.utils.toArray<Element>("[data-component=slide]");

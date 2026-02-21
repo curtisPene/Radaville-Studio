@@ -1,26 +1,20 @@
 @import "tailwindcss";
 
+/* @link https://utopia.fyi/type/calculator?c=320,12,1.125,1240,16,1.25,3,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Typescale */
+  --step--3: clamp(0.512rem, 0.5319rem + -0.0257vw, 0.5267rem);
+  --step--2: clamp(0.5926rem, 0.5761rem + 0.0824vw, 0.64rem);
+  --step--1: clamp(0.6667rem, 0.6203rem + 0.2319vw, 0.8rem);
+  --step-0: clamp(0.75rem, 0.663rem + 0.4348vw, 1rem);
+  --step-1: clamp(0.8438rem, 0.7024rem + 0.7065vw, 1.25rem);
+  --step-2: clamp(0.9492rem, 0.7359rem + 1.0666vw, 1.5625rem);
+  --step-3: clamp(1.0679rem, 0.76rem + 1.5396vw, 1.9531rem);
 
-  /* Type scale */
-  --step--2: clamp(0.4167rem, 0.3515rem + 0.3258vw, 0.56rem);
-  --step--1: clamp(0.5rem, 0.4091rem + 0.4545vw, 0.7rem);
-  --step-0: clamp(0.6rem, 0.475rem + 0.625vw, 0.875rem);
-  --step-1: clamp(0.9rem, 0.8rem + 0.5vw, 1.25rem);
-  --step-2: clamp(1.08rem, 0.9421rem + 0.6893vw, 1.5625rem);
-  --step-3: clamp(1.296rem, 1.1083rem + 0.9388vw, 1.9531rem);
-  --step-4: clamp(0.64rem, 6.2346rem + -6.2162vw, 4.9913rem);
-  --step-5: clamp(0.8rem, 7.4723rem + -7.4137vw, 5.9896rem);
-  --step-6: clamp(1rem, 8.9554rem + -8.8393vw, 7.1875rem);
-
-  /* Spacing Scale */
-}
-
-a:hover,
-button:hover {
-  cursor: pointer;
+  --space-page-layout: clamp(2.75rem, 6.2146rem + -17.3228vw, 5.5rem)
+    clamp(0.5625rem, 1.2712rem + -3.5433vw, 1.125rem)
+    clamp(0.5625rem, 1.2712rem + -3.5433vw, 1.125rem);
 }
 
 @theme inline {
@@ -42,6 +36,11 @@ button:hover {
 }
 
 @custom-variant landscape (@media (aspect-ratio > 1));
+
+a:hover,
+button:hover {
+  cursor: pointer;
+}
 
 @media (prefers-color-scheme: dark) {
   :root {

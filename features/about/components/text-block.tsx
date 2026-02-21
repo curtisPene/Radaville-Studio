@@ -12,7 +12,11 @@ interface TextBlockConfig {
   wordbreak?: boolean;
 }
 
-export const TextBlock = ({ sizing, slice }: TextBlockConfig) => {
+export const TextBlock = ({
+  sizing,
+  slice,
+  wordbreak = false,
+}: TextBlockConfig) => {
   const ref = useTextBlockAnimation();
 
   return (
@@ -26,7 +30,7 @@ export const TextBlock = ({ sizing, slice }: TextBlockConfig) => {
         paddingBottom: fluid(22, 40),
       }}
     >
-      <Title as={sizing} serif wordBreak>
+      <Title as={sizing} serif wordBreak={wordbreak}>
         {slice.primary.title}
       </Title>
       <PrismicRichText

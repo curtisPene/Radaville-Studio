@@ -5,7 +5,7 @@
 		"primary": {
 			"title": {
 				"__TYPE__": "FieldContent",
-				"value": "success",
+				"value": "master",
 				"type": "Text"
 			},
 			"items": {
@@ -18,7 +18,7 @@
 								"list_item",
 								{
 									"__TYPE__": "FieldContent",
-									"value": "after",
+									"value": "sport",
 									"type": "Text"
 								}
 							]

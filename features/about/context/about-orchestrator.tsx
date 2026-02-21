@@ -1,10 +1,19 @@
 "use client";
 
-import { useAppState } from "@/context/app-state-context";
+import {
+  OrchestratorControllerType,
+  useAppState,
+} from "@/context/app-state-context";
 import { useLayoutAnimHandles } from "@/context/layout-anim-context";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { createContext, RefObject, useContext, useRef } from "react";
+import {
+  createContext,
+  RefObject,
+  useContext,
+  useImperativeHandle,
+  useRef,
+} from "react";
 
 export type AnimationController = {
   enter: () => gsap.core.Timeline;
@@ -34,28 +43,38 @@ export function AboutOrchestrator({ children }: { children: React.ReactNode }) {
   const heroHeaderRef = useRef<AnimationController>(null);
   const heroTextRef = useRef<AnimationController>(null);
 
-  const { introComplete, preloadComplete, isTransitioning } = useAppState();
+  const { introComplete, preloadComplete, orchestratorRef } = useAppState();
 
-  useGSAP(
-    () => {
+  const { contextSafe } = useGSAP({ dependencies: [] });
+
+  useImperativeHandle(orchestratorRef, (): OrchestratorControllerType => {
+    const enter = contextSafe(() => {
       if (
         !headerRef.current ||
         !heroHeaderRef.current ||
         !heroTextRef.current
       ) {
+        console.log(
+          headerRef.current && "headerRef.current",
+          heroHeaderRef.current && "heroHeaderRef.current",
+          heroTextRef.current && "heroTextRef.current",
+        );
         return console.error("AboutOrchestrator: missing ref");
       }
 
-      if (!introComplete || !preloadComplete || isTransitioning) return;
+      if (!introComplete || !preloadComplete) return;
 
       gsap
-        .timeline({ delay: 1.4 })
-        .add(headerRef.current.enter())
+        .timeline()
+        .add(headerRef.current!.enter())
         .add(heroHeaderRef.current.enter())
         .add(heroTextRef.current.enter(), "-=0.4");
-    },
-    { dependencies: [introComplete, preloadComplete, isTransitioning] },
-  );
+    });
+
+    return {
+      playEnter: enter,
+    };
+  });
 
   return (
     <AboutOrchestratorContext value={{ heroHeaderRef, heroTextRef }}>

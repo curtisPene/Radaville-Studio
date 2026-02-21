@@ -6,8 +6,10 @@ import gsap from "gsap";
 
 type Direction = "forward" | "backward";
 
-export const useSlideNumberAnimation = (ref: RefObject<HTMLDivElement | null>) => {
-  const { contextSafe } = useGSAP({ scope: ref });
+export const useSlideNumberAnimation = (
+  ref: RefObject<HTMLDivElement | null>,
+) => {
+  const { contextSafe } = useGSAP({ scope: ref, dependencies: [] });
 
   return contextSafe(
     (_direction: Direction, nextIndex: number): gsap.core.Timeline => {
@@ -15,7 +17,9 @@ export const useSlideNumberAnimation = (ref: RefObject<HTMLDivElement | null>) =
         "[data-animate-component=slide-number-current]",
       )[0];
 
-      return gsap.timeline().set(slideNumber, { innerText: nextIndex + 1 }, 0.2);
+      return gsap
+        .timeline()
+        .set(slideNumber, { innerText: nextIndex + 1 }, 0.2);
     },
   );
 };

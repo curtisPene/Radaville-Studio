@@ -14,7 +14,7 @@ export type HeaderAnimController = {
 export const useHeaderAnimation = () => {
   const { headerRef } = useLayoutAnimHandles();
   const ref = useRef<HTMLDivElement>(null);
-  const { contextSafe } = useGSAP();
+  const { contextSafe } = useGSAP({ scope: ref, dependencies: [] });
 
   const buildEntrance = contextSafe(() =>
     gsap

@@ -1,8 +1,8 @@
 {
-  "id": "list",
+  "id": "gallery",
   "type": "SharedSlice",
-  "name": "List",
-  "description": "List",
+  "name": "Gallery",
+  "description": "Gallery",
   "variations": [
     {
       "id": "default",
@@ -12,24 +12,25 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
-        "title": {
-          "type": "Text",
-          "config": {
-            "label": "Title",
-            "placeholder": "Title"
-          }
-        },
-        "items": {
+        "gallery_items": {
           "type": "Group",
           "config": {
-            "label": "Items",
+            "label": "Gallery Items",
             "repeat": true,
             "fields": {
-              "list_item": {
+              "caption": {
                 "type": "Text",
                 "config": {
-                  "label": "List Item",
+                  "label": "Caption",
                   "placeholder": ""
+                }
+              },
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "Image",
+                  "constraint": {},
+                  "thumbnails": []
                 }
               }
             }

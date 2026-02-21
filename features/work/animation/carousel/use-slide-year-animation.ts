@@ -11,7 +11,7 @@ export const useSlideYearAnimation = (
   ref: RefObject<HTMLDivElement | null>,
   projectSlideData: ProjectSlide[],
 ) => {
-  const { contextSafe } = useGSAP({ scope: ref });
+  const { contextSafe } = useGSAP({ scope: ref, dependencies: [] });
 
   return contextSafe(
     (_direction: Direction, nextIndex: number): gsap.core.Timeline => {
@@ -27,8 +27,12 @@ export const useSlideYearAnimation = (
       const incomingYear = projectSlideData[nextIndex].year;
 
       const tl = gsap.timeline({
-        onStart: () => { gsap.set(incoming, { innerText: incomingYear }); },
-        onComplete: () => { tl.revert(); },
+        onStart: () => {
+          gsap.set(incoming, { innerText: incomingYear });
+        },
+        onComplete: () => {
+          tl.revert();
+        },
       });
 
       return tl.to([current, incoming], {

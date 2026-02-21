@@ -69,7 +69,72 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
-type NavigationDocumentDataSlicesSlice = NavInfoSectionSlice;
+type AboutDocumentDataSlicesSlice =
+  | ListSlice
+  | ImageSlice
+  | GallerySlice
+  | TextBlockSlice;
+
+/**
+ * Content for About documents
+ */
+interface AboutDocumentData {
+  /**
+   * Slice Zone field in *About*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<AboutDocumentDataSlicesSlice>; /**
+   * Meta Title field in *About*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: about.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *About*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: about.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *About*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * About document from Prismic
+ *
+ * - **API ID**: `about`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type AboutDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<Simplify<AboutDocumentData>, "about", Lang>;
+
+type NavigationDocumentDataSlicesSlice = never;
 
 /**
  * Content for Navigation documents
@@ -169,17 +234,14 @@ export type NavigationDocument<Lang extends string = string> =
     Lang
   >;
 
-type PageDocumentDataSlicesSlice =
-  | ListSlice
-  | GalleryImageSlice
-  | TextBlockSlice;
+type PageDocumentDataSlicesSlice = never;
 
 /**
- * Content for Page documents
+ * Content for PageMeta documents
  */
 interface PageDocumentData {
   /**
-   * Title field in *Page*
+   * Title field in *PageMeta*
    *
    * - **Field Type**: Text
    * - **Placeholder**: Page Title
@@ -190,7 +252,7 @@ interface PageDocumentData {
   title: prismic.KeyTextField;
 
   /**
-   * Page Title field in *Page*
+   * Page Title field in *PageMeta*
    *
    * - **Field Type**: Text
    * - **Placeholder**: Page Title
@@ -201,7 +263,7 @@ interface PageDocumentData {
   page_title: prismic.KeyTextField;
 
   /**
-   * Page Number field in *Page*
+   * Page Number field in *PageMeta*
    *
    * - **Field Type**: Text
    * - **Placeholder**: Page Number
@@ -212,7 +274,7 @@ interface PageDocumentData {
   page_number: prismic.KeyTextField;
 
   /**
-   * Description field in *Page*
+   * Description field in *PageMeta*
    *
    * - **Field Type**: Text
    * - **Placeholder**: Page Description
@@ -223,7 +285,7 @@ interface PageDocumentData {
   description: prismic.KeyTextField;
 
   /**
-   * Background Color field in *Page*
+   * Background Color field in *PageMeta*
    *
    * - **Field Type**: Color
    * - **Placeholder**: Background Color
@@ -234,7 +296,7 @@ interface PageDocumentData {
   background_color: prismic.ColorField;
 
   /**
-   * Font Color field in *Page*
+   * Font Color field in *PageMeta*
    *
    * - **Field Type**: Color
    * - **Placeholder**: Font Color
@@ -245,18 +307,7 @@ interface PageDocumentData {
   font_color: prismic.ColorField;
 
   /**
-   * Footer Image field in *Page*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: page.footer_image
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/image
-   */
-  footer_image: prismic.ImageField<never>;
-
-  /**
-   * Slice Zone field in *Page*
+   * Slice Zone field in *PageMeta*
    *
    * - **Field Type**: Slice Zone
    * - **Placeholder**: *None*
@@ -265,7 +316,7 @@ interface PageDocumentData {
    * - **Documentation**: https://prismic.io/docs/slices
    */
   slices: prismic.SliceZone<PageDocumentDataSlicesSlice>; /**
-   * Meta Title field in *Page*
+   * Meta Title field in *PageMeta*
    *
    * - **Field Type**: Text
    * - **Placeholder**: A title of the page used for social media and search engines
@@ -276,7 +327,7 @@ interface PageDocumentData {
   meta_title: prismic.KeyTextField;
 
   /**
-   * Meta Description field in *Page*
+   * Meta Description field in *PageMeta*
    *
    * - **Field Type**: Text
    * - **Placeholder**: A brief summary of the page
@@ -287,7 +338,7 @@ interface PageDocumentData {
   meta_description: prismic.KeyTextField;
 
   /**
-   * Meta Image field in *Page*
+   * Meta Image field in *PageMeta*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -299,7 +350,7 @@ interface PageDocumentData {
 }
 
 /**
- * Page document from Prismic
+ * PageMeta document from Prismic
  *
  * - **API ID**: `page`
  * - **Repeatable**: `true`
@@ -413,64 +464,134 @@ export type ProjectDocument<Lang extends string = string> =
   >;
 
 export type AllDocumentTypes =
+  | AboutDocument
   | NavigationDocument
   | PageDocument
   | ProjectDocument;
 
 /**
- * Primary content in *GalleryImage → Default → Primary*
+ * Item in *Gallery → Default → Primary → Gallery Items*
  */
-export interface GalleryImageSliceDefaultPrimary {
+export interface GallerySliceDefaultPrimaryGalleryItemsItem {
   /**
-   * Image field in *GalleryImage → Default → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: gallery_image.default.primary.image
-   * - **Documentation**: https://prismic.io/docs/fields/image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Caption field in *GalleryImage → Default → Primary*
+   * Caption field in *Gallery → Default → Primary → Gallery Items*
    *
    * - **Field Type**: Text
-   * - **Placeholder**: A short description of the gallery item
-   * - **API ID Path**: gallery_image.default.primary.caption
+   * - **Placeholder**: *None*
+   * - **API ID Path**: gallery.default.primary.gallery_items[].caption
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
   caption: prismic.KeyTextField;
+
+  /**
+   * Image field in *Gallery → Default → Primary → Gallery Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: gallery.default.primary.gallery_items[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
 }
 
 /**
- * Default variation for GalleryImage Slice
+ * Primary content in *Gallery → Default → Primary*
+ */
+export interface GallerySliceDefaultPrimary {
+  /**
+   * Gallery Items field in *Gallery → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: gallery.default.primary.gallery_items[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  gallery_items: prismic.GroupField<
+    Simplify<GallerySliceDefaultPrimaryGalleryItemsItem>
+  >;
+}
+
+/**
+ * Default variation for Gallery Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
  * - **Documentation**: https://prismic.io/docs/slices
  */
-export type GalleryImageSliceDefault = prismic.SharedSliceVariation<
+export type GallerySliceDefault = prismic.SharedSliceVariation<
   "default",
-  Simplify<GalleryImageSliceDefaultPrimary>,
+  Simplify<GallerySliceDefaultPrimary>,
   never
 >;
 
 /**
- * Slice variation for *GalleryImage*
+ * Slice variation for *Gallery*
  */
-type GalleryImageSliceVariation = GalleryImageSliceDefault;
+type GallerySliceVariation = GallerySliceDefault;
 
 /**
- * GalleryImage Shared Slice
+ * Gallery Shared Slice
  *
- * - **API ID**: `gallery_image`
- * - **Description**: GalleryImage
+ * - **API ID**: `gallery`
+ * - **Description**: Gallery
  * - **Documentation**: https://prismic.io/docs/slices
  */
-export type GalleryImageSlice = prismic.SharedSlice<
-  "gallery_image",
-  GalleryImageSliceVariation
+export type GallerySlice = prismic.SharedSlice<
+  "gallery",
+  GallerySliceVariation
 >;
+
+/**
+ * Primary content in *Image → Default → Primary*
+ */
+export interface ImageSliceDefaultPrimary {
+  /**
+   * Caption field in *Image → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Caption
+   * - **API ID Path**: image.default.primary.caption
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  caption: prismic.KeyTextField;
+
+  /**
+   * Image field in *Image → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for Image Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ImageSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ImageSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Image*
+ */
+type ImageSliceVariation = ImageSliceDefault;
+
+/**
+ * Image Shared Slice
+ *
+ * - **API ID**: `image`
+ * - **Description**: Image
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ImageSlice = prismic.SharedSlice<"image", ImageSliceVariation>;
 
 /**
  * Item in *List → Default → Primary → Items*
@@ -480,7 +601,7 @@ export interface ListSliceDefaultPrimaryItemsItem {
    * List Item field in *List → Default → Primary → Items*
    *
    * - **Field Type**: Text
-   * - **Placeholder**: List Ite
+   * - **Placeholder**: *None*
    * - **API ID Path**: list.default.primary.items[].list_item
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
@@ -495,7 +616,7 @@ export interface ListSliceDefaultPrimary {
    * Title field in *List → Default → Primary*
    *
    * - **Field Type**: Text
-   * - **Placeholder**: List Title
+   * - **Placeholder**: Title
    * - **API ID Path**: list.default.primary.title
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
@@ -540,88 +661,6 @@ type ListSliceVariation = ListSliceDefault;
 export type ListSlice = prismic.SharedSlice<"list", ListSliceVariation>;
 
 /**
- * Item in *NavInfoSection → Default → Primary → Section Items*
- */
-export interface NavInfoSectionSliceDefaultPrimarySectionItemsItem {
-  /**
-   * Section Item field in *NavInfoSection → Default → Primary → Section Items*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Section Item
-   * - **API ID Path**: nav_info_section.default.primary.section_items[].section_item
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  section_item: prismic.KeyTextField;
-}
-
-/**
- * Primary content in *NavInfoSection → Default → Primary*
- */
-export interface NavInfoSectionSliceDefaultPrimary {
-  /**
-   * Title field in *NavInfoSection → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Section Title
-   * - **API ID Path**: nav_info_section.default.primary.title
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  title: prismic.KeyTextField;
-
-  /**
-   * Section Number field in *NavInfoSection → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Section Number
-   * - **API ID Path**: nav_info_section.default.primary.section_number
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  section_number: prismic.KeyTextField;
-
-  /**
-   * Section Items field in *NavInfoSection → Default → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: nav_info_section.default.primary.section_items[]
-   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
-   */
-  section_items: prismic.GroupField<
-    Simplify<NavInfoSectionSliceDefaultPrimarySectionItemsItem>
-  >;
-}
-
-/**
- * Default variation for NavInfoSection Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type NavInfoSectionSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<NavInfoSectionSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *NavInfoSection*
- */
-type NavInfoSectionSliceVariation = NavInfoSectionSliceDefault;
-
-/**
- * NavInfoSection Shared Slice
- *
- * - **API ID**: `nav_info_section`
- * - **Description**: NavInfoSection
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type NavInfoSectionSlice = prismic.SharedSlice<
-  "nav_info_section",
-  NavInfoSectionSliceVariation
->;
-
-/**
  * Primary content in *TextBlock → Default → Primary*
  */
 export interface TextBlockSliceDefaultPrimary {
@@ -634,16 +673,6 @@ export interface TextBlockSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
   title: prismic.KeyTextField;
-
-  /**
-   * Subtitle field in *TextBlock → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Secondary title
-   * - **API ID Path**: text_block.default.primary.subtitle
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  subtitle: prismic.KeyTextField;
 
   /**
    * Content field in *TextBlock → Default → Primary*
@@ -707,6 +736,9 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      AboutDocument,
+      AboutDocumentData,
+      AboutDocumentDataSlicesSlice,
       NavigationDocument,
       NavigationDocumentData,
       NavigationDocumentDataSlicesSlice,
@@ -717,20 +749,20 @@ declare module "@prismicio/client" {
       ProjectDocumentData,
       ProjectDocumentDataGalleryItem,
       AllDocumentTypes,
-      GalleryImageSlice,
-      GalleryImageSliceDefaultPrimary,
-      GalleryImageSliceVariation,
-      GalleryImageSliceDefault,
+      GallerySlice,
+      GallerySliceDefaultPrimaryGalleryItemsItem,
+      GallerySliceDefaultPrimary,
+      GallerySliceVariation,
+      GallerySliceDefault,
+      ImageSlice,
+      ImageSliceDefaultPrimary,
+      ImageSliceVariation,
+      ImageSliceDefault,
       ListSlice,
       ListSliceDefaultPrimaryItemsItem,
       ListSliceDefaultPrimary,
       ListSliceVariation,
       ListSliceDefault,
-      NavInfoSectionSlice,
-      NavInfoSectionSliceDefaultPrimarySectionItemsItem,
-      NavInfoSectionSliceDefaultPrimary,
-      NavInfoSectionSliceVariation,
-      NavInfoSectionSliceDefault,
       TextBlockSlice,
       TextBlockSliceDefaultPrimary,
       TextBlockSliceVariation,

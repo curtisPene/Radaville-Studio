@@ -3,7 +3,6 @@
 import { HeaderAnimController } from "@/components/layout/header/use-header-animation";
 import { FooterAnimController } from "@/components/layout/footer/use-footer-animaiton";
 import { createContext, useContext, useRef, RefObject } from "react";
-import { useGSAP } from "@gsap/react";
 
 type LayoutAnimContextType = {
   headerRef: RefObject<HeaderAnimController | null>;

@@ -16,9 +16,8 @@ export const Header = ({ pageNumber, pageTitle }: HeaderConfig) => {
   const ref = useHeaderAnimation();
 
   return (
-    <>
+    <div data-component="header-root" ref={ref}>
       <header
-        ref={ref}
         data-component="header"
         className="flex flex-row items-start justify-between fixed left-0 top-0 right-0 opacity-0 z-7"
         style={{
@@ -42,6 +41,6 @@ export const Header = ({ pageNumber, pageTitle }: HeaderConfig) => {
           <NavButton />
         </div>
       </header>
-    </>
+    </div>
   );
 };

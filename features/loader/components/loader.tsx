@@ -23,7 +23,7 @@ export const Loader = () => {
         data-component="progress"
         as="headline"
         serif
-        className="opacity-0 w-12.5"
+        className="opacity-0"
       >
         00
       </Title>
