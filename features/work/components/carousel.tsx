@@ -2,15 +2,13 @@
 
 import { ImageField } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
-import { useCarouselAnimations } from "@/features/work/animation/carousel/use-carousel-animations";
 import { ProjectSlide } from "@/lib/prismic-service";
-import { getSlides } from "../lib/lib";
-import { useCarousel as useCarouselContext } from "@/features/work/context/carousel-context";
 import clsx from "clsx";
 import { CarouselFooter } from "./carousel-footer";
 import { Footer } from "@/components/layout/footer/footer";
 import { Label } from "@/components/typography/label";
 import { fluid } from "@/lib/fluid";
+import { RefObject } from "react";
 
 const Slide = ({
   translateZ,
@@ -56,14 +54,32 @@ const Z_OFFSETS = [
   { translateZ: "translate-z-35", faded: true, clipped: false },
 ];
 
-export function Carousel({ data: projectSlideData }: { data: ProjectSlide[] }) {
-  const { currentSlideDataIndex } = useCarouselContext();
-  const slides = getSlides(projectSlideData, currentSlideDataIndex);
-  const ref = useCarouselAnimations(projectSlideData);
+export type CarouselProps = {
+  /** Visible slides to render (computed by container) */
+  visibleSlides: ProjectSlide[];
+  /** Current slide index */
+  currentSlideIndex: number;
+  /** Current slide year */
+  currentYear: string;
+  /** Total number of slides */
+  totalSlides: number;
+  /** Animation ref from hook */
+  animationRef: RefObject<HTMLElement | null>;
+};
 
+/**
+ * Pure Carousel component - no external dependencies
+ * All data is passed via props for maximum testability and reusability
+ */
+export function Carousel({
+  visibleSlides,
+  currentYear,
+  totalSlides,
+  animationRef,
+}: CarouselProps) {
   return (
     <section
-      ref={ref}
+      ref={animationRef}
       data-component="carousel-root"
       className={clsx("flex-1 flex flex-col")}
     >
@@ -78,7 +94,7 @@ export function Carousel({ data: projectSlideData }: { data: ProjectSlide[] }) {
             className="h-[3.8vw] overflow-clip"
             style={{ height: "var(--step-0)" }}
           >
-            <Label>{projectSlideData[currentSlideDataIndex].year}</Label>
+            <Label>{currentYear}</Label>
             <Label>####</Label>
           </div>
         </div>
@@ -88,7 +104,7 @@ export function Carousel({ data: projectSlideData }: { data: ProjectSlide[] }) {
             <Label data-animate-component="slide-number-current" inline>
               1
             </Label>
-            {""} - {projectSlideData.length}
+            {""} - {totalSlides}
           </Label>
         </div>
       </div>
@@ -101,7 +117,7 @@ export function Carousel({ data: projectSlideData }: { data: ProjectSlide[] }) {
           }}
         >
           {Z_OFFSETS.map((offset, index) => {
-            const slide = slides[index];
+            const slide = visibleSlides[index];
             return (
               <Slide
                 key={index}
