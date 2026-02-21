@@ -9,7 +9,7 @@ export const AboutImage = ({ imageSlice }: { imageSlice: ImageSlice }) => {
         field={imageSlice.primary.image}
         width={1920}
         height={1080}
-        className="w-full"
+        className="w-full object-cover"
         style={{ height: fluid(440, 480) }}
       />
     </div>

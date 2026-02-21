@@ -9,7 +9,7 @@ import { useListAnimation } from "@/features/about/animation/use-services-animat
 export const Services = ({ slices }: { slices: Content.ListSlice[] }) => {
   return (
     <div
-      className={`flex flex-row w-full justify-between ${styles.services}`}
+      className={`${styles["services-root"]} flex flex-row w-full justify-between ${styles.services}`}
       style={
         {
           "--padding-y": fluid(24, 48),

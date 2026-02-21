@@ -8,4 +8,9 @@
     padding-top: var(--padding-y-landscape);
     padding-bottom: var(--padding-y-landscape);
   }
+
+  .services-root {
+    position: sticky;
+    top: 0;
+  }
 }

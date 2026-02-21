@@ -21,7 +21,7 @@ export const AboutOutro = ({
         maskImage: "url('/images/about/mask.svg')",
         maskPosition: "center ",
         maskRepeat: "no-repeat",
-        maskSize: "40%",
+        maskSize: "30%",
       }}
     >
       <div
