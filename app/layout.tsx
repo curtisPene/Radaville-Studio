@@ -48,7 +48,7 @@ export default async function RootLayout({
               className={`${neueWorldRegular.variable} ${oldStandardTT.variable} ${interTight.variable} antialiased relative bg-black`}
             >
               <NoScrollRestoration />
-              <SplashWrapper />
+              {/* <SplashWrapper /> */}
               <SmoothScroll />
               <LayoutAnimProvider>
                 {children}

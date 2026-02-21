@@ -16,7 +16,7 @@ export const ImageSection = ({ slice }: { slice: Content.ImageSlice }) => {
     () => {
       gsap.from(ref.current, {
         opacity: 0,
-        duration: 1.8,
+        duration: 0.8,
         ease: "linear",
         scrollTrigger: { trigger: ref.current, start: "top+=25% bottom" },
       });

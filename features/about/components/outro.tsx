@@ -9,7 +9,7 @@ export const Outro = ({ imageSlice }: { imageSlice: Content.ImageSlice }) => {
       style={{
         mask: "url(/images/about/mask.svg)",
         maskPosition: "center",
-        maskSize: fluid(120, 480),
+        maskSize: fluid(120, 360),
         maskRepeat: "no-repeat",
       }}
     >

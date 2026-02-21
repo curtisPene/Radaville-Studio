@@ -29,8 +29,8 @@ const AppStateContext = createContext<AppStateContextType | undefined>(
 );
 
 export function AppStateProvider({ children }: { children: React.ReactNode }) {
-  const [preloadComplete, setPreloadComplete] = useState(false);
-  const [introComplete, setIntroComplete] = useState(false);
+  const [preloadComplete, setPreloadComplete] = useState(true);
+  const [introComplete, setIntroComplete] = useState(true);
   const pathname = usePathname();
   const isPopStateRef = useRef(false);
 

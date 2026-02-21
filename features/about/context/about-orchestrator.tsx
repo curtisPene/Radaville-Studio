@@ -20,7 +20,7 @@ export type AnimationController = {
 };
 
 type AboutOrchestratorContextType = {
-  heroHeaderRef: RefObject<AnimationController | null>;
+  heroRef: RefObject<AnimationController | null>;
   heroTextRef: RefObject<AnimationController | null>;
 };
 
@@ -40,7 +40,7 @@ export const useAboutOrchestrator = () => {
 
 export function AboutOrchestrator({ children }: { children: React.ReactNode }) {
   const { headerRef } = useLayoutAnimHandles();
-  const heroHeaderRef = useRef<AnimationController>(null);
+  const heroRef = useRef<AnimationController>(null);
   const heroTextRef = useRef<AnimationController>(null);
 
   const { introComplete, preloadComplete, orchestratorRef } = useAppState();
@@ -50,22 +50,24 @@ export function AboutOrchestrator({ children }: { children: React.ReactNode }) {
   useImperativeHandle(orchestratorRef, (): OrchestratorControllerType => {
     const enter = contextSafe(() => {
       if (
-        !headerRef.current
-        //   !heroHeaderRef.current ||
+        !headerRef.current ||
+        !heroRef.current
         //   !heroTextRef.current
       ) {
         console.log(
           headerRef.current && "headerRef.current",
-          heroHeaderRef.current && "heroHeaderRef.current",
-          heroTextRef.current && "heroTextRef.current",
+          heroRef.current && "heroHeaderRef.current",
+          // heroTextRef.current && "heroTextRef.current",
         );
         return console.error("AboutOrchestrator: missing ref");
       }
 
-      // if (!introComplete || !preloadComplete) return;
+      if (!introComplete || !preloadComplete) return;
 
-      gsap.timeline().add(headerRef.current!.enter());
-      // .add(heroHeaderRef.current.enter())
+      gsap
+        .timeline()
+        .add(headerRef.current!.enter())
+        .add(heroRef.current.enter());
       // .add(heroTextRef.current.enter(), "-=0.4");
     });
 
@@ -75,7 +77,7 @@ export function AboutOrchestrator({ children }: { children: React.ReactNode }) {
   });
 
   return (
-    <AboutOrchestratorContext value={{ heroHeaderRef, heroTextRef }}>
+    <AboutOrchestratorContext value={{ heroRef, heroTextRef }}>
       {children}
     </AboutOrchestratorContext>
   );
