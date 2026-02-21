@@ -50,9 +50,9 @@ export function AboutOrchestrator({ children }: { children: React.ReactNode }) {
   useImperativeHandle(orchestratorRef, (): OrchestratorControllerType => {
     const enter = contextSafe(() => {
       if (
-        !headerRef.current ||
-        !heroHeaderRef.current ||
-        !heroTextRef.current
+        !headerRef.current
+        //   !heroHeaderRef.current ||
+        //   !heroTextRef.current
       ) {
         console.log(
           headerRef.current && "headerRef.current",
@@ -62,13 +62,11 @@ export function AboutOrchestrator({ children }: { children: React.ReactNode }) {
         return console.error("AboutOrchestrator: missing ref");
       }
 
-      if (!introComplete || !preloadComplete) return;
+      // if (!introComplete || !preloadComplete) return;
 
-      gsap
-        .timeline()
-        .add(headerRef.current!.enter())
-        .add(heroHeaderRef.current.enter())
-        .add(heroTextRef.current.enter(), "-=0.4");
+      gsap.timeline().add(headerRef.current!.enter());
+      // .add(heroHeaderRef.current.enter())
+      // .add(heroTextRef.current.enter(), "-=0.4");
     });
 
     return {
