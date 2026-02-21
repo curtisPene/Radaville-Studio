@@ -1,0 +1,11 @@
+.services {
+  padding-top: var(--padding-y);
+  padding-bottom: var(--padding-y);
+}
+
+@media (min-aspect-ratio: 1/1) {
+  .services {
+    padding-top: var(--padding-y-landscape);
+    padding-bottom: var(--padding-y-landscape);
+  }
+}

@@ -12,6 +12,8 @@ export const useAboutOutroAnimation = () => {
 
   useGSAP(
     () => {
+      if (!ref.current) return;
+
       gsap
         .timeline({
           scrollTrigger: {
@@ -22,11 +24,7 @@ export const useAboutOutroAnimation = () => {
             scrub: true,
           },
         })
-        .fromTo(
-          ref.current,
-          { maskSize: "50%" },
-          { maskSize: "180%", duration: 1.4, ease: "none" },
-        )
+        .to(ref.current, { maskSize: "180%", duration: 1.4, ease: "none" })
         .fromTo(
           "[data-component=outro-image-wrapper]",
           { scale: 1.4 },

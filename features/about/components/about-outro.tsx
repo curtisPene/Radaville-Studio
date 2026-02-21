@@ -1,10 +1,14 @@
 "use client";
 
 import { useAboutOutroAnimation } from "@/features/about/animation/about-outro/use-about-outro-animation";
-import { ImageField } from "@prismicio/client";
+import { Content } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 
-export const AboutOutro = ({ footer_image }: { footer_image: ImageField }) => {
+export const AboutOutro = ({
+  imageSlice,
+}: {
+  imageSlice: Content.ImageSlice;
+}) => {
   const ref = useAboutOutroAnimation();
   return (
     <div
@@ -17,7 +21,7 @@ export const AboutOutro = ({ footer_image }: { footer_image: ImageField }) => {
         maskImage: "url('/images/about/mask.svg')",
         maskPosition: "center ",
         maskRepeat: "no-repeat",
-        maskSize: "50%",
+        maskSize: "40%",
       }}
     >
       <div
@@ -26,7 +30,7 @@ export const AboutOutro = ({ footer_image }: { footer_image: ImageField }) => {
         style={{}}
       >
         <PrismicNextImage
-          field={footer_image}
+          field={imageSlice.primary.image}
           width={1920}
           height={1080}
           className="object-cover h-full w-full"

@@ -6,6 +6,7 @@ import {
 } from "@/features/about/context/about-orchestrator";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useImperativeHandle, useRef } from "react";
 
@@ -14,7 +15,7 @@ gsap.registerPlugin(SplitText);
 export const useTextAnimation = () => {
   const ref = useRef<HTMLElement>(null);
   const { heroTextRef } = useAboutOrchestrator();
-  const { contextSafe } = useGSAP({ scope: ref });
+  const { contextSafe } = useGSAP({ scope: ref, dependencies: [] });
 
   const enter = contextSafe(() => {
     const splitP = new SplitText("p", {
@@ -34,6 +35,7 @@ export const useTextAnimation = () => {
           gsap.set("p", { opacity: 1 });
         },
         onComplete: () => {
+          ScrollTrigger.refresh();
           splitP.revert();
           splith2.revert();
         },

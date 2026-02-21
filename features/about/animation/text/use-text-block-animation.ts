@@ -1,5 +1,6 @@
 "use client";
 
+import { useAppState } from "@/context/app-state-context";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -10,20 +11,30 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export const useTextBlockAnimation = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const { pageReady } = useAppState();
   useGSAP(
     () => {
-      const pSplit = new SplitText("p", { type: "lines", mask: "lines" });
-      const h2Split = new SplitText("h2", { type: "lines", mask: "lines" });
+      if (!pageReady || !ref.current) return;
+
+      const pElements = ref.current.querySelectorAll("p");
+      const h2Elements = ref.current.querySelectorAll("h2");
+
+      if (pElements.length === 0 && h2Elements.length === 0) return;
+
+      const pSplit = new SplitText(Array.from(pElements), {
+        type: "lines",
+        mask: "lines",
+      });
+      const h2Split = new SplitText(Array.from(h2Elements), {
+        type: "lines",
+        mask: "lines",
+      });
 
       gsap
         .timeline({
           scrollTrigger: {
             trigger: ref.current,
             start: "top 70%",
-          },
-          onComplete: () => {
-            pSplit.revert();
-            h2Split.revert();
           },
         })
         .from(h2Split.lines, {
@@ -43,7 +54,10 @@ export const useTextBlockAnimation = () => {
           "-=0.2",
         );
     },
-    { scope: ref, dependencies: [] },
+    {
+      scope: ref,
+      dependencies: [pageReady],
+    },
   );
   return ref;
 };

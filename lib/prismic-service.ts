@@ -1,9 +1,12 @@
 import { createClient } from "@/prismicio";
 import {
   NavigationDocumentData,
-  PageDocumentDataSlicesSlice,
+  TextBlockSlice,
+  ListSlice,
+  GallerySlice,
+  ImageSlice,
 } from "@/prismicio-types";
-import { ImageField, SliceZone } from "@prismicio/client";
+import { ImageField } from "@prismicio/client";
 
 export type PageData = {
   title: string;
@@ -12,8 +15,6 @@ export type PageData = {
   font_color: string;
   page_title: string;
   page_number: string;
-  footer_image: ImageField;
-  slices?: SliceZone<PageDocumentDataSlicesSlice>;
 };
 
 export type ProjectSlide = {
@@ -34,8 +35,6 @@ export async function getPageData(uid: string): Promise<PageData> {
     font_color,
     page_title,
     page_number,
-    slices,
-    footer_image,
   } = page.data;
 
   if (
@@ -56,8 +55,6 @@ export async function getPageData(uid: string): Promise<PageData> {
     font_color,
     page_title,
     page_number,
-    slices,
-    footer_image,
   };
 }
 
@@ -69,6 +66,41 @@ export async function getNavigationData(): Promise<NavigationDocumentData> {
   }
 
   return data;
+}
+
+export async function getAboutData() {
+  const data = (await createClient().getSingle("about")).data;
+  const { slices } = data;
+
+  if (!slices) {
+    throw new Error(`Missing required data for page: about`);
+  }
+
+  const sorted: {
+    textBlocks: TextBlockSlice[];
+    lists: ListSlice[];
+    galleries: GallerySlice[];
+    images: ImageSlice[];
+  } = { textBlocks: [], lists: [], galleries: [], images: [] };
+
+  slices.forEach((slice) => {
+    switch (slice.slice_type) {
+      case "text_block":
+        sorted.textBlocks.push(slice);
+        break;
+      case "list":
+        sorted.lists.push(slice);
+        break;
+      case "gallery":
+        sorted.galleries.push(slice);
+        break;
+      case "image":
+        sorted.images.push(slice);
+        break;
+    }
+  });
+
+  return { ...data, sorted };
 }
 
 export async function getProjectSlideData(): Promise<ProjectSlide[]> {

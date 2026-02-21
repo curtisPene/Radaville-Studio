@@ -1,13 +1,14 @@
 import { PageLayout } from "@/components/layout/page-layout/page-layout";
 import { HeroHeader } from "@/features/about/components/hero-header";
 import { AboutOrchestrator } from "@/features/about/context/about-orchestrator";
-import { getPageData, getSlices } from "@/lib/prismic-service";
+import { getAboutData, getPageData } from "@/lib/prismic-service";
 import { Metadata } from "next";
-import { Gallery } from "@/components/layout/gallery/Gallery";
+import { AboutFooter } from "@/features/about/components/about-footer";
 import { HeroTextBlock } from "@/features/about/components/hero-text-block";
+import { Gallery } from "@/components/layout/gallery/Gallery";
 import { TextBlock } from "@/features/about/components/text-block";
 import { AboutOutro } from "@/features/about/components/about-outro";
-import { AboutFooter } from "@/features/about/components/about-footer";
+import { ServicesBlock } from "@/features/about/components/services-block";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -29,26 +30,9 @@ const {
   page_number,
   title,
   description,
-  slices,
-  footer_image,
 } = await getPageData("about");
 
-if (!slices) {
-  throw new Error(`Missing required data for page: about`);
-}
-
-const textBlocks = getSlices(slices, "text_block");
-const galleryImages = getSlices(slices, "gallery_image");
-const firstSetImages = galleryImages.slice(0, 3);
-const secondSetImages = galleryImages.slice(4, 5);
-
-const aboutBlock = textBlocks.find((s) => s.primary.title === "About");
-const seaverBlock = textBlocks.find((s) => s.primary.title === "Seaver Rada");
-const outroBlock = textBlocks.find(
-  (s) =>
-    s.primary.title ===
-    "Elevating Spaces, Defining Aesthetics, Cultivating Brands",
-);
+const data = await getAboutData();
 
 export default function AboutPage() {
   return (
@@ -63,14 +47,23 @@ export default function AboutPage() {
         pageNumber={page_number}
       >
         <HeroHeader />
-        {aboutBlock && <HeroTextBlock slice={aboutBlock} />}
-        <Gallery items={firstSetImages} />
-        {seaverBlock && (
-          <TextBlock slice={seaverBlock} sizing="title" wordbreak />
+        {data.sorted.textBlocks[0] && (
+          <HeroTextBlock slice={data.sorted.textBlocks[0]} />
         )}
-        <Gallery items={secondSetImages} />
-        {outroBlock && <TextBlock slice={outroBlock} sizing="title" />}
-        <AboutOutro footer_image={footer_image} />
+        {data.sorted.galleries[0] && (
+          <Gallery slice={data.sorted.galleries[0]} />
+        )}
+        <TextBlock slice={data.sorted.textBlocks[1]} sizing="title" wordbreak />
+        <ServicesBlock
+          imageSlice={data.sorted.images[0]}
+          lists={data.sorted.lists}
+        />
+        <TextBlock
+          slice={data.sorted.textBlocks[2]}
+          sizing="title"
+          wordbreak={false}
+        />
+        <AboutOutro imageSlice={data.sorted.images[1]} />
         <AboutFooter />
       </PageLayout>
     </AboutOrchestrator>
