@@ -1,6 +1,7 @@
 "use client";
 
 import { useGalleryAnimation } from "@/components/layout/gallery/use-gallery-animation";
+import { Label } from "@/components/typography/label";
 import { fluid } from "@/lib/fluid";
 import { Content } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
@@ -22,7 +23,14 @@ const GalleryItem = ({
         height: fluid(440, 640),
       }}
     >
-      <PrismicNextImage field={item.image} fill className="object-cover" />
+      <Label faded caption>
+        {item.caption}
+      </Label>
+      <PrismicNextImage
+        field={item.image}
+        fill
+        className="object-cover w-full aspect-151/220"
+      />
     </div>
   );
 };

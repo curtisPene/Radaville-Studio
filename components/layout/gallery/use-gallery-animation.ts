@@ -16,6 +16,7 @@ export const useGalleryAnimation = () => {
         {
           opacity: 1,
           duration: 1.8,
+          ease: "linear",
           scrollTrigger: {
             trigger: ref.current,
             start: "top+=25% bottom ",

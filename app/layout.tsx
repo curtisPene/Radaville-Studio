@@ -9,7 +9,6 @@ import { NavigationWrapper } from "@/components/navigation-wrapper/navigation-wr
 import localFont from "next/font/local";
 import { SmoothScroll } from "@/components/lenis/SmoothScroll";
 import { SplashWrapper } from "@/features/loader/components/splash-wrapper";
-import Script from "next/script";
 import { NoScrollRestoration } from "@/components/no-scroll-restoration/no-scroll-restoration";
 
 const neueWorldRegular = localFont({
