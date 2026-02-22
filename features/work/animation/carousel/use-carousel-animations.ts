@@ -71,7 +71,7 @@ export const useCarouselAnimations = (projectSlideData: ProjectSlide[]) => {
       .add(buildIndicator(direction, nextIndex), 0);
   };
 
-  const observer = useCarouselObserver(ref, play);
+  useCarouselObserver(ref, play);
 
   useImperativeHandle(
     carouselRef,
@@ -79,7 +79,7 @@ export const useCarouselAnimations = (projectSlideData: ProjectSlide[]) => {
       enter: (
         header: HeaderAnimController["enter"],
         footer: FooterAnimController["enter"],
-      ) => buildCarouselEntrance(header, footer, observer),
+      ) => buildCarouselEntrance(header, footer),
     }),
   );
 

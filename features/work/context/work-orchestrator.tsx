@@ -2,21 +2,10 @@
 
 import { FooterAnimController } from "@/components/layout/footer/use-footer-animaiton";
 import { HeaderAnimController } from "@/components/layout/header/use-header-animation";
-import {
-  OrchestratorControllerType,
-  useAppState,
-} from "@/context/app-state-context";
 import { useLayoutAnimHandles } from "@/context/layout-anim-context";
-import { useGSAP } from "@gsap/react";
+import { useOrchestratorController } from "@/context/use-orchestrator-controller";
 import gsap from "gsap";
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useRef,
-  RefObject,
-  useImperativeHandle,
-} from "react";
+import { createContext, useContext, useRef, RefObject } from "react";
 
 export type CarouselAnimController = {
   enter: (
@@ -46,30 +35,21 @@ export const useWorkOrchestrator = () => {
 export function WorkOrchestrator({ children }: { children: React.ReactNode }) {
   const carouselRef = useRef<CarouselAnimController>(null);
   const { headerRef, footerRef } = useLayoutAnimHandles();
-  const { introComplete, preloadComplete, orchestratorRef } = useAppState();
 
-  const { contextSafe } = useGSAP({ dependencies: [] });
+  useOrchestratorController(() => {
+    if (!carouselRef.current || !headerRef.current || !footerRef.current) {
+      console.error("WorkOrchestrator: missing ref");
+      return;
+    }
 
-  useImperativeHandle(orchestratorRef, (): OrchestratorControllerType => {
-    const enter = contextSafe(() => {
-      if (!carouselRef.current || !headerRef.current || !footerRef.current) {
-        return console.error("WorkOrchestrator: missing ref");
-      }
-
-      if (!introComplete || !preloadComplete) return;
-
-      gsap
-        .timeline()
-        .add(
-          carouselRef.current.enter(
-            headerRef.current.enter,
-            footerRef.current.enter,
-          ),
-        );
-    });
-    return {
-      playEnter: enter,
-    };
+    return gsap
+      .timeline()
+      .add(
+        carouselRef.current.enter(
+          headerRef.current.enter,
+          footerRef.current.enter,
+        ),
+      );
   });
 
   return (

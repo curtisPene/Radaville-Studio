@@ -14,7 +14,6 @@ export const useCarouselEntrance = (ref: RefObject<HTMLDivElement | null>) => {
     (
       header: HeaderAnimController["enter"],
       footer: FooterAnimController["enter"],
-      observer: RefObject<Observer | null>,
     ) => {
       const slides = gsap.utils.toArray(
         "[data-component=slide]",
@@ -35,13 +34,9 @@ export const useCarouselEntrance = (ref: RefObject<HTMLDivElement | null>) => {
       return gsap
         .timeline({
           onStart: () => {
-            observer.current?.disable();
             gsap.set(firstImage, { scale: 1.8 });
             gsap.set(firstVisibleSlide, { opacity: 1, scale: 0.8 });
             proxy.inset = 100;
-          },
-          onComplete: () => {
-            observer.current?.enable();
           },
         })
         .to(proxy, {

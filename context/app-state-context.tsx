@@ -13,6 +13,7 @@ import {
 
 export type OrchestratorControllerType = {
   playEnter: () => void;
+  onEntranceComplete?: (callback: () => void) => void;
 };
 
 type AppStateContextType = {
@@ -47,8 +48,10 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
+    console.log(isPopStateRef.current);
     if (isPopStateRef.current) {
       isPopStateRef.current = false;
+
       document.fonts.ready.then(() =>
         setTimeout(() => {
           orchestratorRef.current?.playEnter();

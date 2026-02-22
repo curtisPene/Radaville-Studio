@@ -1,19 +1,9 @@
 "use client";
 
-import {
-  OrchestratorControllerType,
-  useAppState,
-} from "@/context/app-state-context";
 import { useLayoutAnimHandles } from "@/context/layout-anim-context";
-import { useGSAP } from "@gsap/react";
+import { useOrchestratorController } from "@/context/use-orchestrator-controller";
 import gsap from "gsap";
-import {
-  createContext,
-  RefObject,
-  useContext,
-  useImperativeHandle,
-  useRef,
-} from "react";
+import { createContext, RefObject, useContext, useRef } from "react";
 
 export type AnimationController = {
   enter: () => gsap.core.Timeline;
@@ -43,37 +33,17 @@ export function AboutOrchestrator({ children }: { children: React.ReactNode }) {
   const heroRef = useRef<AnimationController>(null);
   const heroTextRef = useRef<AnimationController>(null);
 
-  const { introComplete, preloadComplete, orchestratorRef } = useAppState();
+  useOrchestratorController(() => {
+    if (!headerRef.current || !heroRef.current) {
+      console.error("AboutOrchestrator: missing ref");
+      return;
+    }
 
-  const { contextSafe } = useGSAP({ dependencies: [] });
-
-  useImperativeHandle(orchestratorRef, (): OrchestratorControllerType => {
-    const enter = contextSafe(() => {
-      if (
-        !headerRef.current ||
-        !heroRef.current
-        //   !heroTextRef.current
-      ) {
-        console.log(
-          headerRef.current && "headerRef.current",
-          heroRef.current && "heroHeaderRef.current",
-          // heroTextRef.current && "heroTextRef.current",
-        );
-        return console.error("AboutOrchestrator: missing ref");
-      }
-
-      if (!introComplete || !preloadComplete) return;
-
-      gsap
-        .timeline()
-        .add(headerRef.current!.enter())
-        .add(heroRef.current.enter());
-      // .add(heroTextRef.current.enter(), "-=0.4");
-    });
-
-    return {
-      playEnter: enter,
-    };
+    return gsap
+      .timeline()
+      .add(headerRef.current.enter())
+      .add(heroRef.current.enter());
+    // .add(heroTextRef.current.enter(), "-=0.4");
   });
 
   return (

@@ -1,9 +1,9 @@
 "use client";
 
-import { RefObject, useRef } from "react";
-import { useGSAP } from "@gsap/react";
+import { RefObject, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { Observer } from "gsap/dist/Observer";
+import { useAppState } from "@/context/app-state-context";
 
 gsap.registerPlugin(Observer);
 
@@ -13,10 +13,12 @@ export const useCarouselObserver = (
   ref: RefObject<HTMLDivElement | null>,
   play: (direction: Direction) => void,
 ) => {
-  const observerRef = useRef<ReturnType<typeof Observer.create> | null>(null);
-  useGSAP(
-    () => {
-      if (!ref.current) return;
+  const observerRef = useRef<Observer | null>(null);
+  const { orchestratorRef } = useAppState();
+
+  useEffect(() => {
+    const createObserver = () => {
+      if (!ref.current || observerRef.current) return;
       observerRef.current = Observer.create({
         type: "wheel,touch",
         target: ref.current,
@@ -24,9 +26,11 @@ export const useCarouselObserver = (
         onUp: () => play("forward"),
         onDown: () => play("backward"),
       });
-    },
-    { scope: ref, dependencies: [] },
-  );
+    };
+
+    // Wait for entrance to complete before creating observer
+    orchestratorRef.current?.onEntranceComplete?.(createObserver);
+  }, [ref, play, orchestratorRef]);
 
   return observerRef;
 };
