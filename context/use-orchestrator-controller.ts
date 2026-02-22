@@ -5,7 +5,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { OrchestratorControllerType, useAppState } from "./app-state-context";
 
-type BuildEntranceTimeline = () => gsap.core.Timeline | void;
+export type BuildEntranceTimeline = () => gsap.core.Timeline | void;
 
 /**
  * Reusable orchestrator controller hook
